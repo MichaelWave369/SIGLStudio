@@ -2,7 +2,7 @@ export type HandoffType = "sigil" | "sequence" | "diff" | "batch" | "project" | 
 
 export interface HandoffPayload {
   handoff_type: HandoffType;
-  version: "0.7";
+  version: "0.8";
   created_at: string;
   source_context: string;
   integrity_hash: string;

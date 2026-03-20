@@ -1,26 +1,28 @@
 # SIGLStudio
 
-SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, visualization, comparison, review, boards, artifacts, handoff, and workstation UX.
+SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, visualization, comparison, review, boards, artifacts, handoff, templates, analytics, and workstation UX.
 
 Vibe remains canonical for parsing, lowering, verification, proof truth, and engine-side provenance.
 
-## v0.7 highlights
+## v0.8 highlights
 
-- Curated review templates (with local custom template save).
-- Board pipeline exports to artifact/review/presentation/handoff/session manifests.
-- Advanced proof/report analytics overlays with deterministic metric summaries.
-- Optional bounded local extension registry hooks (config-only, schema-validated).
-- Desktop ergonomics polish with runtime badge + recent files/items cohesion.
+- Deeper composition pipelines with previewable deterministic manifests and send-to actions.
+- Desktop polish: runtime-aware actions/help surfaces and clearer packaging notes.
+- Extension pack schema versioning + migration-aware import validation.
+- Dashboard-style analytics route (`/analytics`) with local deterministic filtering/metrics.
+- Optional local automation recipes route (`/recipes`) with explicit user-triggered runs.
+- Workflow snapshots and stronger route-aware workstation cohesion.
 
 ## Core routes
 
 - `/compose` / `/validate` / `/atlas` / `/sequences` / `/export`
 - `/diff` / `/batch` / `/projects` / `/sessions` / `/present`
 - `/artifacts` / `/boards` / `/review-packs` / `/review-flows`
+- `/analytics` / `/recipes`
 
 ## Desktop mode (optional)
 
-See `desktop/README.md` for optional Electron setup. Browser workflows remain first-class.
+See `desktop/README.md` for optional Electron setup and polished workflow notes. Browser workflows remain first-class.
 
 ## Local run commands
 
@@ -34,8 +36,9 @@ npm run build
 
 ## Additional docs
 
-- `docs/review-templates.md`
 - `docs/board-pipelines.md`
+- `docs/analytics-dashboard.md`
+- `docs/recipes.md`
+- `docs/extension-packs.md`
 - `docs/extensions.md`
-- `docs/engine-ingestion.md`
-- `docs/import-export-compat.md`
+- `docs/review-templates.md`

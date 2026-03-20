@@ -4,7 +4,7 @@ import { createHandoff, validateHandoff } from "../lib/handoff";
 describe("handoff import/export validation", () => {
   it("creates deterministic handoff payload", () => {
     const handoff = createHandoff({ handoff_type: "sigil", source_context: "/compose", payload: { source: "Φ" } });
-    expect(handoff.version).toBe("0.7");
+    expect(handoff.version).toBe("0.8");
     expect(validateHandoff(handoff).valid).toBe(true);
   });
 

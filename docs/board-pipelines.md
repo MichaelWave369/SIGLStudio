@@ -1,5 +1,5 @@
-# Board pipeline notes (v0.7)
+# Board pipeline notes (v0.8)
 
-- Board pipelines export deterministic manifests (`lib/boardPipeline.ts`) for artifact-set/review-pack/presentation/handoff/session outputs.
-- Outputs preserve selected block ids, board hash, source context, and theme id.
-- Mapping is metadata-driven (no visual scraping).
+- Board/review composition pipelines use explicit deterministic manifests.
+- Preview dialog supports inclusion/exclusion before export.
+- Manifests preserve source context, included IDs, hash metadata, and theme.

@@ -350,3 +350,57 @@ export interface ExtensionEntry {
   schema_version: string;
   config: Record<string, unknown>;
 }
+
+export type PipelineSourceType = "board" | "review-pack" | "review-flow" | "batch" | "diff" | "project";
+export type PipelineTargetType = "review-pack" | "artifact-set" | "presentation" | "handoff" | "session";
+
+export interface CompositionPipelineManifest {
+  id: string;
+  source_type: PipelineSourceType;
+  source_id: string;
+  target_type: PipelineTargetType;
+  included_ids: string[];
+  theme_id: string;
+  source_hash?: string;
+  board_hash?: string;
+  pack_hash?: string;
+  created_at: string;
+  export_version: string;
+}
+
+export interface ExtensionPack {
+  id: string;
+  title: string;
+  schema_version: string;
+  created_at: string;
+  entries: ExtensionEntry[];
+}
+
+export interface AnalyticsDashboardFilter {
+  source: "all" | PipelineSourceType;
+  min_issue_count: number;
+}
+
+export interface RecipeAction {
+  id: string;
+  kind: "validate" | "inspect" | "summarize-analytics" | "create-artifact-set" | "create-review-pack" | "create-presentation" | "export-handoff" | "apply-theme" | "create-board" | "create-session";
+  params: Record<string, string | number | boolean>;
+}
+
+export interface AutomationRecipe {
+  id: string;
+  name: string;
+  description: string;
+  source_scope: PipelineSourceType | "global";
+  output_target: PipelineTargetType | "none";
+  actions: RecipeAction[];
+  last_run_at?: string;
+  schema_version: string;
+}
+
+export interface WorkflowSnapshot {
+  id: string;
+  route: string;
+  label: string;
+  created_at: string;
+}

@@ -1,4 +1,4 @@
-# Desktop packaging (v0.7)
+# Desktop packaging (v0.8)
 
 SIGLStudio keeps web mode as default. Desktop mode is optional and intended for local-first review workflows.
 
@@ -13,20 +13,19 @@ SIGLStudio keeps web mode as default. Desktop mode is optional and intended for 
 
 This enables desktop file open/save bridge methods used by `lib/fileSystemBridge.ts`.
 
-## Ergonomics notes
+## Polished desktop workflow notes
 
-- Runtime badge appears in the shell for desktop/web awareness.
-- Recent files are tracked locally for quick context continuity.
-- Boards/review/artifact/extension imports can push recent file entries.
+- Runtime badge and desktop actions panel surface mode/help context.
+- Recent files/workflow snapshots support quick local continuity.
+- Use `Open Recent` behavior from workstation panels to quickly resume.
+- File association guidance: `.json`, `.sigl`, `.siglboard.json`, `.siglreview.json`.
 
-## File association guidance
-
-Use `.json`, `.sigl`, `.siglboard.json`, and `.siglreview.json` in desktop open workflows.
-
-## Production notes
+## Build/run notes
 
 - Build web assets first: `npm run build`
 - Start Next production server: `npm run start`
 - Launch Electron with `SIGL_DESKTOP_DEV_URL=http://localhost:3000 npx electron desktop/main.cjs`
 
-Icon and app metadata can be incrementally added in this folder without impacting browser workflows.
+## Metadata placeholders
+
+- `desktop/icon-placeholder.txt` marks location for future platform icon assets.

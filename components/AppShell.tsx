@@ -13,6 +13,9 @@ import { pushRecentItem } from "@/lib/recentItems";
 import { RuntimeBadge } from "@/components/runtime-badge";
 import { WorkflowJumpMenu } from "@/components/workflow-jump-menu";
 import { RecentItemsPanel } from "@/components/recent-items-panel";
+import { WorkflowSnapshotPanel } from "@/components/workflow-snapshot-panel";
+import { pushWorkflowSnapshot } from "@/lib/workflowSnapshots";
+import { DesktopActionsPanel } from "@/components/desktop-actions-panel";
 
 const nav = [
   ["/", "Home"],
@@ -29,7 +32,9 @@ const nav = [
   ["/artifacts", "Artifacts"],
   ["/boards", "Boards"],
   ["/review-packs", "Review Packs"],
-  ["/review-flows", "Review Flows"]
+  ["/review-flows", "Review Flows"],
+  ["/analytics", "Analytics"],
+  ["/recipes", "Recipes"]
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -38,6 +43,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem(storageKeys.route, pathname);
     pushRecentItem({ id: pathname, route: pathname, label: pathname });
+    pushWorkflowSnapshot({ id: crypto.randomUUID(), route: pathname, label: `Visited ${pathname}` });
   }, [pathname]);
 
   return (
@@ -46,10 +52,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.7</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.8</p>
               <RuntimeBadge />
             </div>
-            <h1 className="text-2xl font-semibold">Repeatable Review Systems</h1>
+            <h1 className="text-2xl font-semibold">Composition Pipelines & Workstation Polish</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <GlobalEngineStatus />
@@ -75,10 +81,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
       </header>
-      <div className="grid gap-4 lg:grid-cols-[1fr_260px]">
+      <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
         <div>{children}</div>
         <aside className="space-y-4">
           <RecentItemsPanel />
+          <WorkflowSnapshotPanel />
+          <DesktopActionsPanel />
         </aside>
       </div>
     </div>

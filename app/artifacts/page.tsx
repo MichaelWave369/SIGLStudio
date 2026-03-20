@@ -10,6 +10,7 @@ import { getCurrentSource } from "@/lib/studioStorage";
 import { downloadTextFile } from "@/lib/utils";
 import { ThemePicker } from "@/components/theme-picker";
 import { ArtifactSetBuilder } from "@/components/artifact-set-builder";
+import { SendToMenu } from "@/components/send-to-menu";
 
 export default function ArtifactsPage() {
   const [type, setType] = useState<ArtifactType>("poster");
@@ -27,6 +28,7 @@ export default function ArtifactsPage() {
         <h2 className="text-xl font-semibold">Artifact Templates</h2>
         <p className="mt-2 text-sm text-muted">Create poster/card/static exports as deterministic SVG + JSON artifacts and grouped artifact sets.</p>
       </div>
+      <SendToMenu source="artifacts" />
       <ArtifactSetBuilder />
       <div className="panel flex flex-wrap gap-2">
         <ArtifactTemplatePicker value={type} onChange={setType} />
@@ -38,7 +40,7 @@ export default function ArtifactsPage() {
         <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => downloadTextFile(`${type}.config.json`, JSON.stringify(artifact, null, 2))}>Export Config JSON</button>
       </div>
       {type === "poster" ? <PosterTemplate config={config} /> : <SymbolCardTemplate config={config} />}
-      <div className="panel text-xs text-muted">PNG/PDF export is intentionally deferred in v0.6 for reliability/local-first simplicity.</div>
+      <div className="panel text-xs text-muted">PNG/PDF export is intentionally deferred in v0.8 for reliability/local-first simplicity.</div>
     </main>
   );
 }

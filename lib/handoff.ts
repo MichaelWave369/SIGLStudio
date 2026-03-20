@@ -4,7 +4,7 @@ import type { HandoffPayload } from "@/lib/handoffTypes";
 export function createHandoff(input: Omit<HandoffPayload, "version" | "created_at" | "integrity_hash">): HandoffPayload {
   const created_at = new Date().toISOString();
   const integrity_hash = stableHash(JSON.stringify(input.payload));
-  return { ...input, version: "0.7", created_at, integrity_hash };
+  return { ...input, version: "0.8", created_at, integrity_hash };
 }
 
 export function validateHandoff(input: unknown): { valid: boolean; reason?: string; handoff?: HandoffPayload } {

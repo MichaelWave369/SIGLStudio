@@ -5,6 +5,7 @@ import { ImportProjectDialog } from "@/components/import-project-dialog";
 import { ProjectDetail } from "@/components/project-detail";
 import { ProjectList } from "@/components/project-list";
 import { getProjects } from "@/lib/projectStorage";
+import { SendToMenu } from "@/components/send-to-menu";
 
 export default function ProjectsPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -21,6 +22,7 @@ export default function ProjectsPage() {
         <h2 className="text-xl font-semibold">Project Packs</h2>
         <p className="mt-2 text-sm text-muted">Organize sigils and sequences into local-first project packs with deterministic integrity metadata.</p>
       </div>
+      <SendToMenu source="project" />
       <ImportProjectDialog />
       <ProjectList projects={projects} onOpen={setSelectedId} />
     </main>
