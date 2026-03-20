@@ -1,11 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AtlasBrowser } from "@/components/AtlasBrowser";
+import { AtlasRelationGraph } from "@/components/atlas-relation-graph";
+import { RelationLegend } from "@/components/relation-legend";
 import { setCurrentSource } from "@/lib/studioStorage";
 
 export default function AtlasPage() {
   const router = useRouter();
+  const [view, setView] = useState<"list" | "graph">("list");
 
   const load = (example: string, symbol?: string) => {
     setCurrentSource(example);
@@ -15,11 +19,17 @@ export default function AtlasPage() {
 
   return (
     <main className="space-y-4">
-      <div className="panel">
-        <h2 className="text-xl font-semibold">Core Glyph Atlas</h2>
-        <p className="mt-2 text-sm text-muted">Filter by generators/operators/states, inspect semantic groups, and load examples directly into Compose.</p>
+      <div className="panel flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-semibold">Core Glyph Atlas</h2>
+          <p className="mt-2 text-sm text-muted">Browse symbolic neighborhoods via list and relation graph modes.</p>
+        </div>
+        <div className="flex gap-2 text-xs">
+          <button className={`rounded border px-2 py-1 ${view === "list" ? "border-accent/40" : "border-line"}`} onClick={() => setView("list")}>List View</button>
+          <button className={`rounded border px-2 py-1 ${view === "graph" ? "border-accent/40" : "border-line"}`} onClick={() => setView("graph")}>Relation Graph</button>
+        </div>
       </div>
-      <AtlasBrowser onLoad={load} />
+      {view === "list" ? <AtlasBrowser onLoad={load} /> : <div className="space-y-4"><AtlasRelationGraph /><RelationLegend /></div>}
     </main>
   );
 }

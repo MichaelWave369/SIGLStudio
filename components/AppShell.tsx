@@ -16,7 +16,10 @@ const nav = [
   ["/validate", "Validate"],
   ["/atlas", "Atlas"],
   ["/sequences", "Sequences"],
-  ["/export", "Export"]
+  ["/export", "Export"],
+  ["/diff", "Diff"],
+  ["/batch", "Batch"],
+  ["/projects", "Projects"]
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -31,7 +34,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 mb-6 rounded-2xl border border-line bg-[#090d17]/90 p-4 backdrop-blur">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.2</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.3</p>
             <h1 className="text-2xl font-semibold">Symbolic Observatory</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -41,6 +44,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <SettingsPanel />
           </div>
         </div>
+        <p className="mb-2 text-xs text-muted">Context: {pathname}</p>
         <nav className="flex flex-wrap gap-2">
           {nav.map(([href, label]) => (
             <Link

@@ -1,18 +1,16 @@
 # SIGLStudio Roadmap
 
-## v0.2 (current)
-- Command palette + keyboard glyph shortcuts.
-- Rich inspect/trace panes (canonical, summary, tree, graph, obligations, issues, hints).
-- Atlas filters/search/details and related symbol exploration.
-- Deterministic export bundle metadata.
-- Adapter normalization + safer mode fallback + expanded tests.
+## v0.3 (current)
+- Inspect diff mode with semantic summary categories.
+- Batch validate/inspect workflows and report export.
+- Atlas relation graph visualization from seeded relation data.
+- Local project packs with deterministic integrity metadata and import validation.
 
-## v0.3 (next)
-- Inspect diff mode across two sigil sources.
-- Batch validate/inspect workspace for sequence timelines.
-- Atlas relation graph visualization.
-- Import/export of full local project packs with integrity checks.
+## v0.4 (next)
+- Presentation mode for walkthrough sessions.
+- Poster/card export templates.
+- Guided symbolic session workflows.
+- Deeper Vibe integration for richer provenance and trace alignment.
 
-## v0.4+
-- Pluggable renderer adapters.
-- Optional local collaboration package exchange workflows.
+## v0.5+
+- Optional plugin framework for alternate renderers and analysis modules.

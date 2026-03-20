@@ -1,12 +1,8 @@
 import type { EngineMode, ExportBundle, TemporalSequenceStep } from "@/lib/types";
+import { stableHash } from "@/lib/hash";
 
 export function deterministicHash(source: string): string {
-  let hash = 2166136261;
-  for (let i = 0; i < source.length; i += 1) {
-    hash ^= source.charCodeAt(i);
-    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
-  }
-  return (hash >>> 0).toString(16).padStart(8, "0");
+  return stableHash(source);
 }
 
 export function buildExportBundle(input: {
@@ -24,7 +20,7 @@ export function buildExportBundle(input: {
 
   return {
     metadata: {
-      export_version: "0.2",
+      export_version: "0.3",
       created_at,
       engine_mode: input.engineMode,
       source_hash: deterministicHash(input.source),

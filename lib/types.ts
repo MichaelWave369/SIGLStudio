@@ -114,3 +114,62 @@ export interface StudioSettings {
   shortcutsEnabled: boolean;
   reducedMotion: boolean;
 }
+
+export interface DiffInspectionSnapshot {
+  source: string;
+  inspect: InspectResult | null;
+  validation: ValidationResult | null;
+  sourceHash: string;
+  sequencePresent: boolean;
+}
+
+export interface DiffSummary {
+  same: boolean;
+  glyphCountDelta: number;
+  obligationCountDelta: number;
+  sequencePresenceDelta: boolean;
+  sourceHashEqual: boolean;
+  categories: Array<"structure changed" | "obligations changed" | "issues changed" | "render hints changed" | "source changed only">;
+}
+
+export interface BatchItem {
+  id: string;
+  title: string;
+  source: string;
+  sequence: boolean;
+}
+
+export interface BatchItemResult {
+  item: BatchItem;
+  validation: ValidationResult | null;
+  inspect: InspectResult | null;
+  sourceHash: string;
+}
+
+export interface ProjectPackItem {
+  id: string;
+  type: "sigil" | "sequence" | "note";
+  title: string;
+  source: string;
+  hash: string;
+  labels: string[];
+}
+
+export interface ProjectPack {
+  id: string;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+  version: string;
+  engine_mode_last_used: EngineMode;
+  export_version: string;
+  pack_hash: string;
+  items: ProjectPackItem[];
+}
+
+export interface RelationEdge {
+  from: string;
+  to: string;
+  label: "related" | "paired" | "state-adjacent" | "operator-neighbor" | "example-associated";
+}

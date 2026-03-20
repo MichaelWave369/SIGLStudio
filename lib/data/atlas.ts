@@ -1,4 +1,4 @@
-import type { GlyphDefinition, TemporalSequenceStep } from "@/lib/types";
+import type { GlyphDefinition, RelationEdge, TemporalSequenceStep } from "@/lib/types";
 
 export const atlasGlyphs: GlyphDefinition[] = [
   { symbol: "Φ", name: "Phi Seed", category: "generator", description: "Origin harmonic seed.", related: ["∴", "☉"], example: "Φ ∴ ☉", semanticGroup: "core" },
@@ -17,6 +17,17 @@ export const atlasGlyphs: GlyphDefinition[] = [
   { symbol: "◎", name: "Dual Ring", category: "state", description: "Encapsulated dual witness.", related: ["⊙", "⊚"], example: "◎ ⟡ ⊙", semanticGroup: "state" },
   { symbol: "⊙", name: "Center Mark", category: "state", description: "Centered observation node.", related: ["◎", "⊚"], example: "⊙ ⟢ ⊚", semanticGroup: "state" },
   { symbol: "⊚", name: "Echo Ring", category: "state", description: "Resonant closure ring.", related: ["Ω", "⊙"], example: "⊚ ∴ Ω", semanticGroup: "state" }
+];
+
+export const atlasRelations: RelationEdge[] = [
+  { from: "Φ", to: "∴", label: "related" },
+  { from: "∴", to: "Ω", label: "example-associated" },
+  { from: "⟨", to: "⟩", label: "paired" },
+  { from: "⟡", to: "Φ", label: "operator-neighbor" },
+  { from: "⟡", to: "Ω", label: "operator-neighbor" },
+  { from: "☉", to: "⟐", label: "state-adjacent" },
+  { from: "◉", to: "⊙", label: "state-adjacent" },
+  { from: "⊙", to: "⊚", label: "related" }
 ];
 
 export const sigilExamples = {

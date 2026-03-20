@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { DraftEntry } from "@/lib/types";
 import { getDrafts, setDrafts } from "@/lib/studioStorage";
+import { createProject, addCurrentDraftToProject } from "@/lib/projectStorage";
 
 interface Props {
   current: string;
@@ -50,7 +51,10 @@ export function LocalDraftsPanel({ current, onLoad, route }: Props) {
   return (
     <div className="panel space-y-2">
       <h3 className="text-lg font-semibold">Local Drafts</h3>
-      <Button onClick={saveDraft}>Save Current Draft</Button>
+      <div className="flex gap-2">
+        <Button onClick={saveDraft}>Save Current Draft</Button>
+        <Button onClick={() => { const p = createProject("Draft Project", "Created from drafts"); addCurrentDraftToProject(p.id, "Current Draft"); }}>Create Project from Current</Button>
+      </div>
       <div className="space-y-2">
         {drafts.length === 0 ? <p className="text-sm text-muted">No drafts yet.</p> : null}
         {drafts.map((draft) => (

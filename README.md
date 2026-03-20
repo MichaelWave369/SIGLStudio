@@ -1,70 +1,63 @@
-# SIGLStudio v0.2
+# SIGLStudio v0.3
 
-SIGLStudio is a local-first symbolic studio for composing, exploring, validating, inspecting, sequencing, and exporting SIGL.
+SIGLStudio is a local-first symbolic studio for composing, exploring, validating, inspecting, comparing, organizing, and exporting SIGL.
 
-> **Architecture boundary:** SIGLStudio is the product/UI layer. Vibe remains canonical for parsing, lowering, and verification truth.
+> **Architecture boundary:** SIGLStudio is the product/UI layer. Vibe remains canonical for parsing, lowering, verification, and proof truth.
 
-## What’s new in v0.2
-- Global command palette (`Ctrl/Cmd + K`) with navigation, insertion, copy/export, and draft commands.
-- Keyboard glyph shortcuts (Alt + key) with cursor-aware insertion and a built-in shortcuts help modal.
-- Rich inspect workspace with tabbed panes: canonical JSON, summary, token tree, graph tables, obligations trace, issues/warnings, render hints.
-- Atlas upgrade with category filters (`generator`, `operator`, `state`), semantic grouping, search, and details modal.
-- Deterministic export bundle metadata (`export_version`, `created_at`, `engine_mode`, `source_hash`, `sequence_present`, `glyph_count`, `obligation_count`).
-- Hardened engine adapter normalization and safe fallback behavior with mode reasons.
-
-## Product scope (truthful)
-- No database.
-- No auth.
-- Local-first by default.
-- Mock Engine Mode always available when Vibe CLI is missing/disabled.
-- Optional server-side bridge for local `vibec` execution.
-
-## Engine behavior
-- Browser calls `lib/vibeAdapter.ts`.
-- Adapter calls local API routes (`/api/engine/validate` and `/api/engine/inspect`).
-- Server bridge optionally invokes:
-  - `vibec sigil-validate <file.vibe> --report json`
-  - `vibec sigil-inspect <file.vibe> --report json`
-- If unavailable/malformed, adapter normalizes response and falls back to mock mode without crashing.
+## What’s new in v0.3
+- **Inspect Diff Mode** (`/diff`) for side-by-side semantic comparison.
+- **Batch Workflows** (`/batch`) for running validate/inspect across multiple sigils.
+- **Atlas Relation Graph** (`/atlas`) for symbolic neighborhoods and relation labels.
+- **Project Packs** (`/projects`) for durable local organization with deterministic integrity metadata.
+- Export/report additions for diff, batch, project pack, and integrity summary JSON.
 
 ## Routes
-- `/` landing + app overview
-- `/compose` compose + glyph picker + inspect workspace + draft management
-- `/validate` validation report + obligations + engine status
-- `/atlas` filterable atlas with glyph detail modal
-- `/sequences` temporal sequence editor with shortcut support
-- `/export` deterministic exports + project bundle payload
+- `/` landing
+- `/compose` compose + inspect workspace
+- `/validate` validation workspace
+- `/atlas` list + relation graph view
+- `/sequences` temporal sequence editor
+- `/export` deterministic export center
+- `/diff` semantic diff workspace
+- `/batch` multi-item validate/inspect workflow
+- `/projects` local project pack manager
 
-## Local setup
+## Local-first project packs
+Project packs include:
+- metadata (`name`, `description`, `created_at`, `updated_at`, `version`, `engine_mode_last_used`)
+- item collection (`sigils`, `sequences`, `notes`)
+- integrity (`pack_hash`, item hashes, `export_version`)
+
+Project pack import includes deterministic validation guards.
+
+## Engine behavior
+- Mock mode is first-class and always available.
+- Optional Vibe CLI bridge can be enabled with:
+  ```bash
+  ENABLE_VIBE_CLI=true npm run dev
+  ```
+- All adapter calls normalize outputs into compare-able/stable shapes for diff and batch workflows.
+
+## Setup
 ```bash
 npm install
 npm run dev
 ```
-Visit: `http://localhost:3000`.
 
-### Optional Vibe mode
-```bash
-ENABLE_VIBE_CLI=true npm run dev
-```
-
-## Test commands
+## Testing
 ```bash
 npm run lint
 npm run test
 ```
 
-## Keyboard shortcuts
-- Open command palette: `Ctrl/Cmd + K`
-- Insert glyphs in editors: `Alt + [1..0,-,q,w,e,r,t]`
-- Shortcut mappings are visible from the global “Keyboard Shortcuts” modal.
-
-## Export bundle metadata
-`export_version`, `created_at`, `engine_mode`, `source_hash`, `sequence_present`, `glyph_count`, `obligation_count`
+## Keyboard / command UX
+- Command palette: `Ctrl/Cmd + K`
+- Glyph insertion: `Alt + [1..0,-,q,w,e,r,t]`
 
 ## Limitations
-- Mock mode remains heuristic and is not canonical truth.
-- Graph layout is intentionally deterministic/simple in v0.2.
-- No collaborative or cloud sync workflows yet.
+- Mock mode remains heuristic and non-canonical.
+- Relation graph uses deterministic static layout (not physics-heavy).
+- No cloud sync/auth/database.
 
 ## Docs
-- Roadmap: `docs/roadmap.md`
+- `docs/roadmap.md`
