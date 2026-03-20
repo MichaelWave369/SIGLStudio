@@ -5,13 +5,14 @@ import { ValidationPanel } from "@/components/ValidationPanel";
 import { sigilExamples } from "@/lib/data/atlas";
 import { validateSigil } from "@/lib/vibeAdapter";
 import type { ValidationResult } from "@/lib/types";
+import { getCurrentSource } from "@/lib/studioStorage";
 
 export default function ValidatePage() {
   const [source, setSource] = useState(sigilExamples.basic);
   const [result, setResult] = useState<ValidationResult | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem("siglstudio-current-source");
+    const saved = getCurrentSource();
     if (saved) setSource(saved);
   }, []);
 

@@ -4,13 +4,13 @@ import { useState } from "react";
 import { GlyphPicker } from "@/components/GlyphPicker";
 import { LocalDraftsPanel } from "@/components/LocalDraftsPanel";
 import { SigilCanvas } from "@/components/SigilCanvas";
-import { SigilGraphView } from "@/components/SigilGraphView";
 import { SigilInput } from "@/components/SigilInput";
 import { useStudioSource } from "@/components/StudioState";
 import { sigilExamples } from "@/lib/data/atlas";
 import { inspectSigil } from "@/lib/vibeAdapter";
 import type { InspectResult } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { InspectPaneTabs } from "@/components/inspect-pane-tabs";
 
 export default function ComposePage() {
   const [source, setSource] = useStudioSource(sigilExamples.basic);
@@ -30,11 +30,11 @@ export default function ComposePage() {
           onExport={() => router.push("/export")}
         />
         <SigilCanvas source={source} />
-        <SigilGraphView inspect={inspect} />
+        <InspectPaneTabs inspect={inspect} />
       </div>
       <div className="space-y-4 lg:col-span-5">
         <GlyphPicker onInsert={insertGlyph} />
-        <LocalDraftsPanel current={source} onLoad={setSource} />
+        <LocalDraftsPanel current={source} onLoad={setSource} route="/compose" />
       </div>
     </main>
   );

@@ -1,42 +1,45 @@
 import type { InspectResult, ValidationResult } from "@/lib/types";
 import { mockInspect, mockValidate } from "@/lib/mockEngine";
+import { normalizeInspectResult, normalizeValidationResult } from "@/lib/engineNormalize";
 
 export async function validateSigil(source: string): Promise<ValidationResult> {
-  if (typeof window !== "undefined") {
-    try {
-      const res = await fetch("/api/engine/validate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source })
-      });
-      if (!res.ok) {
-        return mockValidate(source);
-      }
-      return (await res.json()) as ValidationResult;
-    } catch {
-      return mockValidate(source);
-    }
-  }
+  const fallback = mockValidate(source);
+  if (typeof window === "undefined") return fallback;
 
-  return mockValidate(source);
+  try {
+    const res = await fetch("/api/engine/validate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ source })
+    });
+    if (!res.ok) {
+      return mockValidate(source, `Engine endpoint unavailable (${res.status}); using mock mode.`);
+    }
+    const data = (await res.json()) as unknown;
+    return normalizeValidationResult(data, fallback);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "network error";
+    return mockValidate(source, `Engine call failed (${message}); using mock mode.`);
+  }
 }
 
 export async function inspectSigil(source: string): Promise<InspectResult> {
-  if (typeof window !== "undefined") {
-    try {
-      const res = await fetch("/api/engine/inspect", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source })
-      });
-      if (!res.ok) {
-        return mockInspect(source);
-      }
-      return (await res.json()) as InspectResult;
-    } catch {
-      return mockInspect(source);
-    }
-  }
+  const fallback = mockInspect(source);
+  if (typeof window === "undefined") return fallback;
 
-  return mockInspect(source);
+  try {
+    const res = await fetch("/api/engine/inspect", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ source })
+    });
+    if (!res.ok) {
+      return mockInspect(source, `Engine inspect endpoint unavailable (${res.status}); using mock mode.`);
+    }
+    const data = (await res.json()) as unknown;
+    return normalizeInspectResult(data, fallback);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "network error";
+    return mockInspect(source, `Engine inspect failed (${message}); using mock mode.`);
+  }
 }

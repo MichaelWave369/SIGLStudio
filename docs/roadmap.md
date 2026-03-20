@@ -1,16 +1,18 @@
 # SIGLStudio Roadmap
 
-## v0.1 (current)
-- Local-first composition, validation, atlas, sequence, and export workflows.
-- Mock engine fallback with Vibe CLI adapter boundary.
-- Deterministic SVG previews and timeline rendering.
+## v0.2 (current)
+- Command palette + keyboard glyph shortcuts.
+- Rich inspect/trace panes (canonical, summary, tree, graph, obligations, issues, hints).
+- Atlas filters/search/details and related symbol exploration.
+- Deterministic export bundle metadata.
+- Adapter normalization + safer mode fallback + expanded tests.
 
-## v0.2 (suggested)
-- Command palette and keyboard glyph macros.
-- Rich canonical inspect panes (token tree + obligations trace).
-- Atlas filtering and relation map.
-- Better copy/export presets and project bundles.
+## v0.3 (next)
+- Inspect diff mode across two sigil sources.
+- Batch validate/inspect workspace for sequence timelines.
+- Atlas relation graph visualization.
+- Import/export of full local project packs with integrity checks.
 
-## v0.3+
-- Collaborative review packages (file-based, still local-first by default).
-- Plugin system for alternate renderers and inspectors.
+## v0.4+
+- Pluggable renderer adapters.
+- Optional local collaboration package exchange workflows.

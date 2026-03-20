@@ -4,17 +4,25 @@ import { useMemo, useState } from "react";
 import type { TemporalSequenceStep } from "@/lib/types";
 import { sequenceExample } from "@/lib/data/atlas";
 import { Button } from "@/components/ui/button";
+import { glyphForShortcut, insertAtCursor } from "@/lib/keyboardShortcuts";
+import { getSettings, storageKeys } from "@/lib/studioStorage";
 
 export function TemporalSequenceEditor() {
-  const [steps, setSteps] = useState<TemporalSequenceStep[]>(sequenceExample);
+  const initial = typeof window === "undefined" ? sequenceExample : (JSON.parse(localStorage.getItem(storageKeys.sequence) ?? "null") as TemporalSequenceStep[] | null) ?? sequenceExample;
+  const [steps, setSteps] = useState<TemporalSequenceStep[]>(initial);
   const coherence = useMemo(() => steps.every((s) => s.sigil.trim().length > 0), [steps]);
 
+  const persist = (next: TemporalSequenceStep[]) => {
+    setSteps(next);
+    localStorage.setItem(storageKeys.sequence, JSON.stringify(next));
+  };
+
   const update = (id: string, key: "label" | "sigil", value: string) => {
-    setSteps((prev) => prev.map((s) => (s.id === id ? { ...s, [key]: value } : s)));
+    persist(steps.map((s) => (s.id === id ? { ...s, [key]: value } : s)));
   };
 
   const addStep = () => {
-    setSteps((prev) => [...prev, { id: crypto.randomUUID(), label: `Step ${prev.length + 1}`, sigil: "" }]);
+    persist([...steps, { id: crypto.randomUUID(), label: `Step ${steps.length + 1}`, sigil: "" }]);
   };
 
   const exportSequence = () => {
@@ -38,7 +46,22 @@ export function TemporalSequenceEditor() {
           <div key={step.id} className="rounded-xl border border-line bg-slate-950/40 p-3">
             <div className="mb-2 text-xs text-muted">Step {i + 1}</div>
             <input value={step.label} onChange={(e) => update(step.id, "label", e.target.value)} className="mb-2 w-full rounded border border-line bg-transparent p-2 text-sm" />
-            <input value={step.sigil} onChange={(e) => update(step.id, "sigil", e.target.value)} className="w-full rounded border border-line bg-transparent p-2 text-sm" />
+            <input
+              value={step.sigil}
+              onKeyDown={(e) => {
+                const settings = getSettings();
+                if (!settings.shortcutsEnabled) return;
+                const glyph = glyphForShortcut(e.nativeEvent);
+                if (!glyph) return;
+                e.preventDefault();
+                const target = e.currentTarget;
+                const { next, caret } = insertAtCursor(target.value, glyph, target.selectionStart ?? 0, target.selectionEnd ?? 0);
+                update(step.id, "sigil", next);
+                requestAnimationFrame(() => target.setSelectionRange(caret, caret));
+              }}
+              onChange={(e) => update(step.id, "sigil", e.target.value)}
+              className="w-full rounded border border-line bg-transparent p-2 text-sm"
+            />
           </div>
         ))}
       </div>

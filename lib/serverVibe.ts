@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { InspectResult, ValidationResult } from "@/lib/types";
 import { mockInspect, mockValidate } from "@/lib/mockEngine";
+import { normalizeInspectResult, normalizeValidationResult } from "@/lib/engineNormalize";
 
 const execFileAsync = promisify(execFile);
 
@@ -30,29 +31,31 @@ export async function isVibeAvailable(): Promise<boolean> {
 }
 
 export async function validateSigilServer(source: string): Promise<ValidationResult> {
-  if (!(await isVibeAvailable())) return mockValidate(source);
+  if (!(await isVibeAvailable())) return mockValidate(source, "Vibe CLI not found or ENABLE_VIBE_CLI is false.");
 
+  const fallback = mockValidate(source);
   try {
     return await withTempVibeFile(source, async (filePath) => {
       const { stdout } = await execFileAsync("vibec", ["sigil-validate", filePath, "--report", "json"]);
-      const parsed = JSON.parse(stdout) as Omit<ValidationResult, "mode">;
-      return { ...parsed, mode: "vibe" };
+      const raw = JSON.parse(stdout) as unknown;
+      return normalizeValidationResult({ ...(raw as object), mode: "vibe", modeReason: "Validated via Vibe CLI." }, fallback);
     });
   } catch {
-    return mockValidate(source);
+    return mockValidate(source, "Vibe validate command failed; using mock mode.");
   }
 }
 
 export async function inspectSigilServer(source: string): Promise<InspectResult> {
-  if (!(await isVibeAvailable())) return mockInspect(source);
+  if (!(await isVibeAvailable())) return mockInspect(source, "Vibe CLI not found or ENABLE_VIBE_CLI is false.");
 
+  const fallback = mockInspect(source);
   try {
     return await withTempVibeFile(source, async (filePath) => {
       const { stdout } = await execFileAsync("vibec", ["sigil-inspect", filePath, "--report", "json"]);
-      const parsed = JSON.parse(stdout) as Omit<InspectResult, "mode">;
-      return { ...parsed, mode: "vibe" };
+      const raw = JSON.parse(stdout) as unknown;
+      return normalizeInspectResult({ ...(raw as object), mode: "vibe", modeReason: "Inspected via Vibe CLI." }, fallback);
     });
   } catch {
-    return mockInspect(source);
+    return mockInspect(source, "Vibe inspect command failed; using mock mode.");
   }
 }

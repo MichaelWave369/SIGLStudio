@@ -2,28 +2,49 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import type { DraftEntry } from "@/lib/types";
+import { getDrafts, setDrafts } from "@/lib/studioStorage";
 
 interface Props {
   current: string;
   onLoad: (value: string) => void;
+  route: string;
 }
 
-const storageKey = "siglstudio-drafts";
-
-export function LocalDraftsPanel({ current, onLoad }: Props) {
-  const [drafts, setDrafts] = useState<string[]>([]);
+export function LocalDraftsPanel({ current, onLoad, route }: Props) {
+  const [drafts, setLocalDrafts] = useState<DraftEntry[]>([]);
 
   useEffect(() => {
-    const read = () => setDrafts(JSON.parse(localStorage.getItem(storageKey) ?? "[]") as string[]);
-    read();
-    window.addEventListener("storage", read);
-    return () => window.removeEventListener("storage", read);
+    setLocalDrafts(getDrafts());
   }, []);
 
-  const saveDraft = () => {
-    const next = [current, ...drafts.filter((d) => d !== current)].slice(0, 8);
-    localStorage.setItem(storageKey, JSON.stringify(next));
+  const persist = (next: DraftEntry[]) => {
+    setLocalDrafts(next);
     setDrafts(next);
+  };
+
+  const saveDraft = () => {
+    const name = `Draft ${drafts.length + 1}`;
+    const entry: DraftEntry = { id: crypto.randomUUID(), name, source: current, updatedAt: new Date().toISOString(), route };
+    persist([entry, ...drafts].slice(0, 16));
+  };
+
+  const renameDraft = (id: string) => {
+    const found = drafts.find((d) => d.id === id);
+    if (!found) return;
+    const name = prompt("Rename draft", found.name);
+    if (!name) return;
+    persist(drafts.map((d) => (d.id === id ? { ...d, name, updatedAt: new Date().toISOString() } : d)));
+  };
+
+  const duplicateDraft = (id: string) => {
+    const found = drafts.find((d) => d.id === id);
+    if (!found) return;
+    persist([{ ...found, id: crypto.randomUUID(), name: `${found.name} Copy`, updatedAt: new Date().toISOString() }, ...drafts]);
+  };
+
+  const deleteDraft = (id: string) => {
+    persist(drafts.filter((d) => d.id !== id));
   };
 
   return (
@@ -32,10 +53,18 @@ export function LocalDraftsPanel({ current, onLoad }: Props) {
       <Button onClick={saveDraft}>Save Current Draft</Button>
       <div className="space-y-2">
         {drafts.length === 0 ? <p className="text-sm text-muted">No drafts yet.</p> : null}
-        {drafts.map((draft, i) => (
-          <button key={`${draft}-${i}`} onClick={() => onLoad(draft)} className="block w-full rounded-lg border border-line bg-slate-950/40 p-2 text-left text-xs hover:border-accent/40">
-            {draft}
-          </button>
+        {drafts.map((draft) => (
+          <div key={draft.id} className="rounded-lg border border-line bg-slate-950/40 p-2 text-xs">
+            <button onClick={() => onLoad(draft.source)} className="w-full text-left font-medium hover:text-accent">
+              {draft.name}
+            </button>
+            <p className="text-[11px] text-muted">{new Date(draft.updatedAt).toLocaleString()} · {draft.route}</p>
+            <div className="mt-1 flex gap-2">
+              <button onClick={() => renameDraft(draft.id)} className="text-muted hover:text-slate-100">Rename</button>
+              <button onClick={() => duplicateDraft(draft.id)} className="text-muted hover:text-slate-100">Duplicate</button>
+              <button onClick={() => deleteDraft(draft.id)} className="text-rose-300 hover:text-rose-200">Delete</button>
+            </div>
+          </div>
         ))}
       </div>
     </div>
