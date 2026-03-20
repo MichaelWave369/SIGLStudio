@@ -242,3 +242,66 @@ export interface ProvenanceMeta {
   issue_count?: number;
   normalized_shape_version?: string;
 }
+
+export type RuntimeMode = "web" | "desktop";
+
+export interface BoardLayer {
+  id: string;
+  title: string;
+  visible: boolean;
+  locked: boolean;
+}
+
+export interface BoardConnection {
+  id: string;
+  from_block_id: string;
+  to_block_id: string;
+  label?: string;
+}
+
+export type ReviewStatus = "draft" | "in-review" | "approved" | "revise" | "archived";
+
+export interface ReviewFlowSection {
+  id: string;
+  title: string;
+  content: string;
+  order: number;
+}
+
+export interface ReviewFlow {
+  id: string;
+  source_review_pack_id?: string;
+  title: string;
+  status: ReviewStatus;
+  author_notes: string;
+  reviewer_notes: string;
+  decision_notes: string;
+  next_actions: string[];
+  sections: ReviewFlowSection[];
+  created_at: string;
+  updated_at: string;
+  schema_version: string;
+}
+
+export type ArtifactSetPreset = "review-pack" | "presentation-summary" | "project-overview" | "diff-package" | "board-snapshot";
+
+export type ArtifactSetType = ArtifactType | "review-summary-card" | "board-summary-card" | "session-summary-card";
+
+export interface ArtifactSetItem {
+  id: string;
+  artifact_type: ArtifactSetType;
+  file_name: string;
+  title: string;
+  source_ref: string;
+}
+
+export interface ArtifactSetManifest {
+  id: string;
+  preset: ArtifactSetPreset;
+  theme_id: string;
+  export_version: string;
+  created_at: string;
+  item_count: number;
+  manifest_hash: string;
+  items: ArtifactSetItem[];
+}

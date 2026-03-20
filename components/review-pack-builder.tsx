@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { getProjects } from "@/lib/projectStorage";
 import { createReviewPack, type ReviewPack } from "@/lib/reviewPack";
 import { getReviewPacks, saveReviewPacks } from "@/lib/reviewPackStorage";
@@ -8,8 +9,10 @@ import { ReviewPackSectionEditor } from "@/components/review-pack-section-editor
 import { ReviewPackSummary } from "@/components/review-pack-summary";
 import { ThemePicker } from "@/components/theme-picker";
 import { downloadTextFile } from "@/lib/utils";
+import { createHandoff } from "@/lib/handoff";
 
 export function ReviewPackBuilder() {
+  const router = useRouter();
   const projects = getProjects();
   const [, setPacksRefresh] = useState(0);
   const packs = getReviewPacks();
@@ -39,8 +42,12 @@ export function ReviewPackBuilder() {
           {packs.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
         </select>
         <ThemePicker value={selected.theme_id} onChange={(theme_id) => persist({ ...selected, theme_id })} />
+        <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/present')}>To Present</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/artifacts')}>To Artifact Set</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/boards')}>To Board</button>
         <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.siglreview.json`, JSON.stringify(selected, null, 2))}>Export Pack Config</button>
-        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.review-summary.json`, JSON.stringify({ export_version: "0.5", created_at: new Date().toISOString(), included_item_count: selected.included_items.length, theme_id: selected.theme_id, pack_hash: selected.pack_hash }, null, 2))}>Export Review Summary</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.review-summary.json`, JSON.stringify({ export_version: "0.6", created_at: new Date().toISOString(), included_item_count: selected.included_items.length, theme_id: selected.theme_id, pack_hash: selected.pack_hash }, null, 2))}>Export Review Summary</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.handoff.json`, JSON.stringify(createHandoff({ handoff_type: 'review-pack', source_context: 'review-packs', payload: selected as unknown as Record<string, unknown>, notes: selected.notes, theme_id: selected.theme_id, schema_version: '0.6' }), null, 2))}>Export Handoff</button>
       </div>
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <ReviewPackSectionEditor pack={selected} onChange={persist} />

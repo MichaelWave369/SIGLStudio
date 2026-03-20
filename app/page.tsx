@@ -1,32 +1,28 @@
 import Link from "next/link";
 
+const lanes = [
+  ["/compose", "Compose + Validate", "Draft SIGL quickly, inspect/validate with mock-first and optional Vibe."],
+  ["/boards", "Advanced Boards", "Layered symbolic boards with grouping, connections, and review-focused transforms."],
+  ["/review-flows", "Review Flows", "Move from draft to in-review to decision with deterministic section ordering."],
+  ["/artifacts", "Artifact Sets", "Generate themed artifact bundles with deterministic manifests."],
+  ["/review-packs", "Review Packs", "Package project reviews and handoff payloads with import validation."],
+  ["/validate", "Engine Ingestion", "Normalize richer proof/report payloads while preserving architecture boundaries."]
+] as const;
+
 export default function HomePage() {
   return (
-    <main className="space-y-6">
-      <section className="panel space-y-4 p-8">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent">Visual SIGL Workbench</p>
-        <h2 className="text-4xl font-semibold leading-tight">SIGLStudio is a visual symbolic studio for composing, inspecting, comparing, presenting, reviewing, and handing off SIGL work.</h2>
-        <p className="max-w-3xl text-muted">
-          v0.5 adds Boards/Canvas mode, richer themes, review packs, deeper provenance normalization, file-based handoff formats, and CI-safe lint tooling.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/boards" className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-accent">Open Boards</Link>
-          <Link href="/review-packs" className="rounded-xl border border-line px-4 py-2">Review Packs</Link>
-          <Link href="/present" className="rounded-xl border border-line px-4 py-2">Present</Link>
-        </div>
+    <main className="space-y-4">
+      <section className="panel">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGLStudio v0.6</p>
+        <h2 className="mt-1 text-2xl font-semibold">Desktop-ready Review Workstation</h2>
+        <p className="mt-2 max-w-3xl text-sm text-muted">Local-first symbolic editing, organization, review, presentation, and handoff UX for SIGL. Vibe remains canonical for verification/proof truth and engine provenance.</p>
       </section>
-      <section className="grid gap-4 md:grid-cols-5">
-        {[
-          ["Boards", "Spatial symbolic composition with block-level inspection."],
-          ["Themes", "Observatory, Monolith, Lattice, Quiet Paper presets."],
-          ["Review Packs", "Deterministic project review bundle generation."],
-          ["Handoff", "File-based handoff bundles with integrity checks."],
-          ["Provenance", "Local vs engine metadata normalization panels."]
-        ].map(([title, body]) => (
-          <article key={title} className="panel">
-            <h3 className="font-semibold">{title}</h3>
-            <p className="mt-2 text-sm text-muted">{body}</p>
-          </article>
+      <section className="grid gap-3 md:grid-cols-2">
+        {lanes.map(([href, title, copy]) => (
+          <Link key={href} href={href} className="panel transition hover:border-accent/50">
+            <p className="text-lg font-semibold">{title}</p>
+            <p className="mt-1 text-sm text-muted">{copy}</p>
+          </Link>
         ))}
       </section>
     </main>

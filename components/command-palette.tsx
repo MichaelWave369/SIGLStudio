@@ -45,6 +45,7 @@ export function CommandPalette() {
       { id: "go-artifacts", label: "Go to Artifacts", run: () => router.push("/artifacts") },
       { id: "go-boards", label: "Go to Boards", run: () => router.push("/boards") },
       { id: "go-review", label: "Go to Review Packs", run: () => router.push("/review-packs") },
+      { id: "go-review-flows", label: "Go to Review Flows", run: () => router.push("/review-flows") },
       { id: "insert-basic", label: "Insert basic sigil example", run: () => setCurrentSource(sigilExamples.basic) },
       { id: "insert-coupled", label: "Insert coupled sigil example", run: () => setCurrentSource(sigilExamples.coupled) },
       { id: "insert-recursive", label: "Insert recursive sigil example", run: () => setCurrentSource(sigilExamples.recursive) },
@@ -65,6 +66,10 @@ export function CommandPalette() {
           window.dispatchEvent(new Event("studio-engine-visibility"));
         }
       },
+      { id: "template-board", label: "Starter template: Board", run: () => router.push("/boards") },
+      { id: "template-review-flow", label: "Starter template: Review Flow", run: () => router.push("/review-flows") },
+      { id: "template-artifact-set", label: "Starter template: Artifact Set", run: () => router.push("/artifacts") },
+      { id: "template-desktop-handoff", label: "Starter template: Desktop Handoff", run: () => router.push("/review-packs") },
       { id: "clear-draft", label: "Clear current draft", run: () => setCurrentSource("") }
     ],
     [router]

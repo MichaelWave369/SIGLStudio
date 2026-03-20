@@ -1,16 +1,18 @@
-# SIGLStudio Roadmap
+# Roadmap
 
-## v0.5 (current)
-- Boards/canvas mode with deterministic block layout and local persistence.
-- Theme registry and picker for presentation/artifact/review workflows.
-- Project review pack generation with deterministic sections and hashes.
-- File-based handoff bundle import/export and validation.
-- Provenance normalization that separates local-derived vs engine-provided fields.
-- CI-safe, non-interactive lint tooling migration to explicit ESLint config.
+## v0.6 (current)
 
-## v0.6 (next)
-- Deeper board interactions and alignment assistants.
-- Advanced artifact layout templates.
-- Curated presentation presets and review narratives.
-- Richer Vibe proof/report ingestion mapping.
-- Optional desktop packaging for offline review kits.
+- Desktop-ready packaging path with optional Electron shell and file bridge.
+- Advanced Boards: layers, grouping, locking, relation connections, selection transforms.
+- Review Flows 2.0: statuses, decision notes, next actions, deterministic sections.
+- Vibe-native ingestion normalization for proof/report payloads and ingestion health UI.
+- Artifact set orchestration with presets and deterministic manifest metadata.
+- Hardened import/export reliability: version mismatch notices, detection, migration hooks.
+
+## v0.7 ideas
+
+- Desktop polish: richer menu actions, deeper file associations, packaging metadata/icons.
+- Curated review templates for different symbolic review scenarios.
+- Board-to-artifact pipelines with tighter provenance linking.
+- Advanced proof/report visual analytics and map overlays.
+- Optional local plugin/extensions model for specialized review utilities.

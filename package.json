@@ -1,13 +1,15 @@
 {
   "name": "sigl-studio",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "test": "vitest run"
+    "test": "vitest run",
+    "desktop:dev": "npx electron desktop/main.cjs",
+    "desktop:start": "SIGL_DESKTOP_DEV_URL=http://localhost:3000 npx electron desktop/main.cjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

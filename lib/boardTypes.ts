@@ -1,4 +1,16 @@
-export type BoardBlockType = "sigil" | "sequence" | "note" | "provenance" | "diff-summary" | "batch-summary" | "project-item" | "artifact-preview";
+import type { BoardConnection, BoardLayer } from "@/lib/types";
+
+export type BoardBlockType =
+  | "sigil"
+  | "sequence"
+  | "note"
+  | "provenance"
+  | "diff-summary"
+  | "batch-summary"
+  | "project-item"
+  | "artifact-preview"
+  | "review-notes"
+  | "session-step";
 
 export interface BoardBlock {
   id: string;
@@ -9,6 +21,9 @@ export interface BoardBlock {
   y: number;
   w: number;
   h: number;
+  layer_id?: string;
+  locked?: boolean;
+  group_id?: string;
 }
 
 export interface Board {
@@ -17,6 +32,9 @@ export interface Board {
   description: string;
   zoom: number;
   blocks: BoardBlock[];
+  layers: BoardLayer[];
+  connections: BoardConnection[];
+  schema_version: string;
   created_at: string;
   updated_at: string;
 }

@@ -1,54 +1,48 @@
-# SIGLStudio v0.5
+# SIGLStudio
 
-SIGLStudio is a local-first symbolic studio for composing, comparing, presenting, reviewing, and handing off SIGL work.
+SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, comparison, organization, review, boards, presentation, artifacts, and handoff UX.
 
-> **Architecture boundary:** Vibe owns canonical parsing/lowering/verification truth. SIGLStudio owns UX, visualization, sessions, boards, review packs, and local handoff/export workflows.
+Vibe remains canonical for parsing, lowering, verification, proof truth, and engine-side provenance.
 
-## What’s new in v0.5
-- **Boards / Canvas** (`/boards`) for freeform symbolic block layout.
-- **Theme system** (Observatory, Monolith, Lattice, Quiet Paper) for presentation/artifact/review styling.
-- **Review Packs** (`/review-packs`) for deterministic project review bundle generation.
-- **Handoff formats** (`.siglboard.json`, `.siglreview.json`, etc.) with integrity validation.
-- **Deeper provenance normalization** with local-vs-engine metadata grouping.
-- **Non-interactive linting** via explicit ESLint flat config + `eslint` script.
+## v0.6 highlights
 
-## Routes
-- `/` landing
-- `/compose`, `/validate`, `/atlas`, `/sequences`, `/export`
-- `/diff`, `/batch`, `/projects`
-- `/present`, `/sessions`, `/artifacts`
-- `/boards`, `/review-packs`
+- Desktop-ready path (optional Electron wrapper) with runtime-mode detection and desktop file bridge.
+- Advanced Boards with layers, block locking, grouping, connection overlay, mini-map, and alignment/distribution transforms.
+- Review Flows 2.0 with ordered sections, status/decision panel, and deterministic storage.
+- Deeper Vibe ingestion normalization for proof/report payloads with ingestion health feedback.
+- Artifact Set builder with deterministic manifest + preset workflows.
+- Import/export hardening with file-kind detection, version mismatch warnings, and migration hooks.
 
-## Local-first guarantees
-- No cloud backend
-- No auth
-- No database requirement
-- Mock mode remains first-class
-- Optional Vibe CLI bridge only
+## Core routes
 
-## File-based handoff
-Handoff payloads include explicit type, version, created_at, source context, integrity hash, notes/theme, and route-aware validation/import.
+- `/compose` / `/validate` / `/atlas` / `/sequences` / `/export`
+- `/diff` / `/batch` / `/projects` / `/sessions` / `/present`
+- `/artifacts` / `/boards` / `/review-packs` / `/review-flows`
 
-## Tooling
-`npm run lint` now runs non-interactively via ESLint CLI and flat config.
+## Desktop mode (optional)
 
-## Setup
+See `desktop/README.md` for the minimal Electron target.
+
+Desktop mode is optional and does not replace browser workflows.
+
+## Local run commands
+
 ```bash
 npm install
 npm run dev
-```
-
-## Validation
-```bash
 npm run lint
 npm run test
 npm run build
 ```
 
-## Limitations
-- Boards are bounded/local and intentionally simple (not an infinite whiteboard engine).
-- No realtime collaboration; handoff is file-based only.
-- PNG artifact export remains deferred for reliability.
+Optional desktop launcher (after installing Electron as a dev dependency):
 
-## Docs
-- `docs/roadmap.md`
+```bash
+npm run desktop:dev
+```
+
+## Local-first positioning
+
+- No cloud backend required.
+- No auth/multiplayer/database requirements.
+- Deterministic local serialization is preferred across boards/review/artifact/handoff payloads.

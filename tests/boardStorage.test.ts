@@ -18,7 +18,7 @@ describe("board placement/state serialization", () => {
   });
 
   it("hashes board deterministically", () => {
-    const board = { id: "b", title: "B", description: "", zoom: 1, created_at: "", updated_at: "", blocks: [] };
+    const board = { id: "b", title: "B", description: "", zoom: 1, created_at: "", updated_at: "", schema_version: "0.6", blocks: [], layers: [], connections: [] };
     expect(boardHash(board as any)).toBe(boardHash(board as any));
   });
 });
