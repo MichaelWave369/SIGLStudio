@@ -305,3 +305,48 @@ export interface ArtifactSetManifest {
   manifest_hash: string;
   items: ArtifactSetItem[];
 }
+
+export interface ReviewTemplateDefinition {
+  id: string;
+  title: string;
+  description: string;
+  sections: ReviewFlowSection[];
+  suggested_notes_fields: string[];
+  recommended_artifact_preset: ArtifactSetPreset;
+  recommended_presentation_mode: PresentationFocusMode;
+  decision_prompts: string[];
+  next_action_prompts: string[];
+  schema_version: string;
+  origin: "built-in" | "local";
+}
+
+export interface BoardPipelineManifest {
+  id: string;
+  board_id: string;
+  board_hash: string;
+  output_type: "artifact-set" | "review-pack" | "presentation" | "handoff" | "session";
+  selected_block_ids: string[];
+  theme_id: string;
+  created_at: string;
+  export_version: string;
+  source_context: string;
+}
+
+export interface AnalyticsSummary {
+  source: string;
+  obligations_by_type: Record<string, number>;
+  obligations_by_status: Record<string, number>;
+  issue_by_severity: Record<string, number>;
+  graph_metrics: { node_count: number; edge_count: number };
+  bridge_score?: number;
+  analytics_shape_version: string;
+}
+
+export interface ExtensionEntry {
+  id: string;
+  name: string;
+  kind: "review-template-pack" | "artifact-preset" | "handoff-formatter" | "board-starter" | "analytics-grouping";
+  origin: "built-in" | "local";
+  schema_version: string;
+  config: Record<string, unknown>;
+}

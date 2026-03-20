@@ -10,12 +10,18 @@ import { ReviewPackSummary } from "@/components/review-pack-summary";
 import { ThemePicker } from "@/components/theme-picker";
 import { downloadTextFile } from "@/lib/utils";
 import { createHandoff } from "@/lib/handoff";
+import { listReviewTemplates } from "@/lib/reviewTemplates";
+import { ReviewTemplatePicker } from "@/components/review-template-picker";
+import { ReviewTemplatePreview } from "@/components/review-template-preview";
 
 export function ReviewPackBuilder() {
   const router = useRouter();
   const projects = getProjects();
   const [, setPacksRefresh] = useState(0);
   const packs = getReviewPacks();
+  const templates = listReviewTemplates();
+  const [selectedTemplateId, setSelectedTemplateId] = useState(templates[0]?.id ?? "");
+  const selectedTemplate = templates.find((template) => template.id === selectedTemplateId) ?? null;
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = packs.find((p) => p.id === selectedId) ?? packs[0] ?? null;
 
@@ -23,8 +29,20 @@ export function ReviewPackBuilder() {
 
   if (!selected) {
     return (
-      <div className="panel">
-        <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => { const p = projects[0]; const pack = createReviewPack({ project_id: p.id, title: `${p.name} Review`, notes: "", included_items: p.items.map((i) => i.id) }); saveReviewPacks([pack, ...packs]); setSelectedId(pack.id); setPacksRefresh((v) => v + 1); }}>Create Review Pack</button>
+      <div className="panel space-y-2">
+        <ReviewTemplatePicker templates={templates} value={selectedTemplateId} onChange={setSelectedTemplateId} />
+        <ReviewTemplatePreview template={selectedTemplate} />
+        <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => {
+          const p = projects[0];
+          const pack = createReviewPack({ project_id: p.id, title: `${p.name} Review`, notes: "", included_items: p.items.map((i) => i.id) });
+          if (selectedTemplate) {
+            pack.sections = selectedTemplate.sections;
+            pack.notes = selectedTemplate.suggested_notes_fields.join(", ");
+          }
+          saveReviewPacks([pack, ...packs]);
+          setSelectedId(pack.id);
+          setPacksRefresh((v) => v + 1);
+        }}>Create Review Pack</button>
       </div>
     );
   }
@@ -46,8 +64,8 @@ export function ReviewPackBuilder() {
         <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/artifacts')}>To Artifact Set</button>
         <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/boards')}>To Board</button>
         <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.siglreview.json`, JSON.stringify(selected, null, 2))}>Export Pack Config</button>
-        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.review-summary.json`, JSON.stringify({ export_version: "0.6", created_at: new Date().toISOString(), included_item_count: selected.included_items.length, theme_id: selected.theme_id, pack_hash: selected.pack_hash }, null, 2))}>Export Review Summary</button>
-        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.handoff.json`, JSON.stringify(createHandoff({ handoff_type: 'review-pack', source_context: 'review-packs', payload: selected as unknown as Record<string, unknown>, notes: selected.notes, theme_id: selected.theme_id, schema_version: '0.6' }), null, 2))}>Export Handoff</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.review-summary.json`, JSON.stringify({ export_version: "0.7", created_at: new Date().toISOString(), included_item_count: selected.included_items.length, theme_id: selected.theme_id, pack_hash: selected.pack_hash }, null, 2))}>Export Review Summary</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.handoff.json`, JSON.stringify(createHandoff({ handoff_type: 'review-pack', source_context: 'review-packs', payload: selected as unknown as Record<string, unknown>, notes: selected.notes, theme_id: selected.theme_id, schema_version: '0.7' }), null, 2))}>Export Handoff</button>
       </div>
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <ReviewPackSectionEditor pack={selected} onChange={persist} />

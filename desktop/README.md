@@ -1,4 +1,4 @@
-# Desktop packaging (v0.6)
+# Desktop packaging (v0.7)
 
 SIGLStudio keeps web mode as default. Desktop mode is optional and intended for local-first review workflows.
 
@@ -12,6 +12,16 @@ SIGLStudio keeps web mode as default. Desktop mode is optional and intended for 
    - `npx electron desktop/main.cjs`
 
 This enables desktop file open/save bridge methods used by `lib/fileSystemBridge.ts`.
+
+## Ergonomics notes
+
+- Runtime badge appears in the shell for desktop/web awareness.
+- Recent files are tracked locally for quick context continuity.
+- Boards/review/artifact/extension imports can push recent file entries.
+
+## File association guidance
+
+Use `.json`, `.sigl`, `.siglboard.json`, and `.siglreview.json` in desktop open workflows.
 
 ## Production notes
 

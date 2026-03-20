@@ -1,4 +1,6 @@
 import { ReviewFlowBuilder } from "@/components/review-flow-builder";
+import { AnalyticsSummaryPanel } from "@/components/analytics-summary-panel";
+import { ExtensionRegistryPanel } from "@/components/extension-registry-panel";
 
 export default function ReviewFlowsPage() {
   return (
@@ -8,6 +10,8 @@ export default function ReviewFlowsPage() {
         <p className="mt-2 text-sm text-muted">Build ordered review workflows with status markers, decision notes, and next actions.</p>
       </div>
       <ReviewFlowBuilder />
+      <AnalyticsSummaryPanel source="review-flows" />
+      <ExtensionRegistryPanel />
     </main>
   );
 }

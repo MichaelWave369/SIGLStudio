@@ -9,8 +9,10 @@ import { SettingsPanel } from "@/components/SettingsPanel";
 import { KeyboardShortcutsHelp } from "@/components/keyboard-shortcuts-help";
 import { storageKeys } from "@/lib/studioStorage";
 import { cn } from "@/lib/utils";
-import { detectRuntimeMode } from "@/lib/runtimeMode";
 import { pushRecentItem } from "@/lib/recentItems";
+import { RuntimeBadge } from "@/components/runtime-badge";
+import { WorkflowJumpMenu } from "@/components/workflow-jump-menu";
+import { RecentItemsPanel } from "@/components/recent-items-panel";
 
 const nav = [
   ["/", "Home"],
@@ -32,7 +34,6 @@ const nav = [
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const runtime = detectRuntimeMode();
 
   useEffect(() => {
     localStorage.setItem(storageKeys.route, pathname);
@@ -45,10 +46,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.6</p>
-              <span className="rounded border border-line px-2 py-0.5 text-[10px] uppercase text-muted">{runtime}</span>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.7</p>
+              <RuntimeBadge />
             </div>
-            <h1 className="text-2xl font-semibold">Symbolic Review Workstation</h1>
+            <h1 className="text-2xl font-semibold">Repeatable Review Systems</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <GlobalEngineStatus />
@@ -58,13 +59,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
         <p className="mb-2 text-xs text-muted">Context: {pathname}</p>
-        <div className="mb-2 flex flex-wrap gap-2 text-xs">
-          <Link href="/boards" className="rounded border border-line px-2 py-1">Open current in Board</Link>
-          <Link href="/present" className="rounded border border-line px-2 py-1">Open current in Present</Link>
-          <Link href="/review-flows" className="rounded border border-line px-2 py-1">Open current in Review</Link>
-          <Link href="/artifacts" className="rounded border border-line px-2 py-1">Open current in Artifact</Link>
-        </div>
-        <nav className="flex flex-wrap gap-2">
+        <WorkflowJumpMenu />
+        <nav className="mt-2 flex flex-wrap gap-2">
           {nav.map(([href, label]) => (
             <Link
               key={href}
@@ -79,7 +75,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
       </header>
-      {children}
+      <div className="grid gap-4 lg:grid-cols-[1fr_260px]">
+        <div>{children}</div>
+        <aside className="space-y-4">
+          <RecentItemsPanel />
+        </aside>
+      </div>
     </div>
   );
 }

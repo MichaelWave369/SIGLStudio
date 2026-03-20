@@ -1,4 +1,5 @@
 import { BatchWorkspace } from "@/components/batch-workspace";
+import { AnalyticsSummaryPanel } from "@/components/analytics-summary-panel";
 
 export default function BatchPage() {
   return (
@@ -8,6 +9,7 @@ export default function BatchPage() {
         <p className="mt-2 text-sm text-muted">Run multiple sigils through validation and inspect workflows locally.</p>
       </div>
       <BatchWorkspace />
+      <AnalyticsSummaryPanel source="batch" />
     </main>
   );
 }

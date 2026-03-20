@@ -1,1 +1,1 @@
-export const STORAGE_SCHEMA_VERSION = "0.6";
+export const STORAGE_SCHEMA_VERSION = "0.7";

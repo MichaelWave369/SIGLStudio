@@ -1,17 +1,16 @@
 # SIGLStudio
 
-SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, comparison, organization, review, boards, presentation, artifacts, and handoff UX.
+SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, visualization, comparison, review, boards, artifacts, handoff, and workstation UX.
 
 Vibe remains canonical for parsing, lowering, verification, proof truth, and engine-side provenance.
 
-## v0.6 highlights
+## v0.7 highlights
 
-- Desktop-ready path (optional Electron wrapper) with runtime-mode detection and desktop file bridge.
-- Advanced Boards with layers, block locking, grouping, connection overlay, mini-map, and alignment/distribution transforms.
-- Review Flows 2.0 with ordered sections, status/decision panel, and deterministic storage.
-- Deeper Vibe ingestion normalization for proof/report payloads with ingestion health feedback.
-- Artifact Set builder with deterministic manifest + preset workflows.
-- Import/export hardening with file-kind detection, version mismatch warnings, and migration hooks.
+- Curated review templates (with local custom template save).
+- Board pipeline exports to artifact/review/presentation/handoff/session manifests.
+- Advanced proof/report analytics overlays with deterministic metric summaries.
+- Optional bounded local extension registry hooks (config-only, schema-validated).
+- Desktop ergonomics polish with runtime badge + recent files/items cohesion.
 
 ## Core routes
 
@@ -21,9 +20,7 @@ Vibe remains canonical for parsing, lowering, verification, proof truth, and eng
 
 ## Desktop mode (optional)
 
-See `desktop/README.md` for the minimal Electron target.
-
-Desktop mode is optional and does not replace browser workflows.
+See `desktop/README.md` for optional Electron setup. Browser workflows remain first-class.
 
 ## Local run commands
 
@@ -35,14 +32,10 @@ npm run test
 npm run build
 ```
 
-Optional desktop launcher (after installing Electron as a dev dependency):
+## Additional docs
 
-```bash
-npm run desktop:dev
-```
-
-## Local-first positioning
-
-- No cloud backend required.
-- No auth/multiplayer/database requirements.
-- Deterministic local serialization is preferred across boards/review/artifact/handoff payloads.
+- `docs/review-templates.md`
+- `docs/board-pipelines.md`
+- `docs/extensions.md`
+- `docs/engine-ingestion.md`
+- `docs/import-export-compat.md`

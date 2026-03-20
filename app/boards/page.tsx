@@ -5,7 +5,7 @@ export default function BoardsPage() {
     <main className="space-y-4">
       <div className="panel">
         <h2 className="text-xl font-semibold">Boards / Canvas</h2>
-        <p className="mt-2 text-sm text-muted">Layered symbolic review surface with locking, grouping, alignment/distribution, and optional relation lines.</p>
+        <p className="mt-2 text-sm text-muted">Layered symbolic review surface with locking/grouping plus selection-aware pipeline exports into artifacts/review/presentation/handoff/session manifests.</p>
       </div>
       <BoardWorkspace />
     </main>

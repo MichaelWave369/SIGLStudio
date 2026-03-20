@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ValidationPanel } from "@/components/ValidationPanel";
 import { EngineIngestionPanel } from "@/components/engine-ingestion-panel";
+import { AnalyticsSummaryPanel } from "@/components/analytics-summary-panel";
 import { validateSigil } from "@/lib/vibeAdapter";
 import type { ValidationResult } from "@/lib/types";
 
@@ -22,6 +23,7 @@ export default function ValidatePage() {
       </div>
       <ValidationPanel result={result} />
       <EngineIngestionPanel />
+      <AnalyticsSummaryPanel source="validate" />
     </main>
   );
 }

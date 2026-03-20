@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { openTextFileFromUser } from "@/lib/fileSystemBridge";
+import { pushRecentFile } from "@/lib/recentFiles";
 import { detectImportKind, validateImportVersion } from "@/lib/importVersioning";
 import { VersionMismatchNotice } from "@/components/version-mismatch-notice";
 
@@ -15,6 +16,7 @@ export function ImportValidationDialog() {
         className="rounded border border-line px-3 py-1"
         onClick={async () => {
           const file = await openTextFileFromUser(".json,.siglboard.json,.siglreview.json");
+          pushRecentFile({ id: file.name, name: file.name, kind: "import" });
           const parsed = JSON.parse(file.content) as Record<string, unknown>;
           const kind = detectImportKind(file.name, parsed);
           setSummary(validateImportVersion({ kind, schema_version: typeof parsed.schema_version === "string" ? parsed.schema_version : undefined }));

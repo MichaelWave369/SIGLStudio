@@ -10,6 +10,7 @@ import { downloadTextFile } from "@/lib/utils";
 import { BoardSelectionToolbar } from "@/components/board-selection-toolbar";
 import { BoardLayerPanel } from "@/components/board-layer-panel";
 import { alignBlocksLeft, distributeBlocksHorizontally } from "@/lib/boardTransforms";
+import { BoardPipelinePanel } from "@/components/board-pipeline-panel";
 
 export function BoardWorkspace() {
   const [selectedBoardId, setSelectedBoardId] = useState<string | null>(null);
@@ -72,6 +73,7 @@ export function BoardWorkspace() {
         }}
         onUngroup={() => persist({ ...board, blocks: board.blocks.map((b) => selectedBlockIds.includes(b.id) ? { ...b, group_id: undefined } : b) })}
       />
+      <BoardPipelinePanel board={board} selectedBlockIds={selectedBlockIds} />
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <BoardCanvas board={board} selectedIds={selectedBlockIds} onSelectBlock={(id, multi) => setSelectedBlockIds((prev) => (multi ? (prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id]) : [id]))} />
         <div className="space-y-4">

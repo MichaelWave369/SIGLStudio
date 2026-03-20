@@ -1,5 +1,6 @@
 import { HandoffImportDialog } from "@/components/handoff-import-dialog";
 import { ReviewPackBuilder } from "@/components/review-pack-builder";
+import { AnalyticsSummaryPanel } from "@/components/analytics-summary-panel";
 import { ImportValidationDialog } from "@/components/import-validation-dialog";
 
 export default function ReviewPacksPage() {
@@ -12,6 +13,7 @@ export default function ReviewPacksPage() {
       <HandoffImportDialog />
       <ImportValidationDialog />
       <ReviewPackBuilder />
+      <AnalyticsSummaryPanel source="review-packs" />
     </main>
   );
 }

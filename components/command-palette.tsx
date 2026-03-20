@@ -46,6 +46,8 @@ export function CommandPalette() {
       { id: "go-boards", label: "Go to Boards", run: () => router.push("/boards") },
       { id: "go-review", label: "Go to Review Packs", run: () => router.push("/review-packs") },
       { id: "go-review-flows", label: "Go to Review Flows", run: () => router.push("/review-flows") },
+      { id: "go-extensions", label: "Open Extension Registry", run: () => router.push("/review-flows") },
+      { id: "go-board-pipeline", label: "Open Board Pipelines", run: () => router.push("/boards") },
       { id: "insert-basic", label: "Insert basic sigil example", run: () => setCurrentSource(sigilExamples.basic) },
       { id: "insert-coupled", label: "Insert coupled sigil example", run: () => setCurrentSource(sigilExamples.coupled) },
       { id: "insert-recursive", label: "Insert recursive sigil example", run: () => setCurrentSource(sigilExamples.recursive) },

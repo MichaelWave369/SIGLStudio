@@ -1,4 +1,5 @@
 import { DiffWorkspace } from "@/components/diff-workspace";
+import { AnalyticsSummaryPanel } from "@/components/analytics-summary-panel";
 
 export default function DiffPage() {
   return (
@@ -8,6 +9,7 @@ export default function DiffPage() {
         <p className="mt-2 text-sm text-muted">Compare two sigils side-by-side with semantic difference summaries.</p>
       </div>
       <DiffWorkspace />
+      <AnalyticsSummaryPanel source="diff" />
     </main>
   );
 }
