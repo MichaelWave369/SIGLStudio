@@ -1,0 +1,14 @@
+import { describe, expect, it } from "vitest";
+import { migrateLegacyBoard, migrateLegacyExtensionPack } from "@/lib/migrations";
+
+describe("v0.9 migrations", () => {
+  it("migrates legacy board to 0.9", () => {
+    const migrated = migrateLegacyBoard({ id: "b", blocks: [] });
+    expect(migrated.schema_version).toBe("0.9");
+  });
+
+  it("migrates extension pack", () => {
+    const pack = migrateLegacyExtensionPack({ title: "old", entries: [] });
+    expect(pack.schema_version).toBe("0.9");
+  });
+});
