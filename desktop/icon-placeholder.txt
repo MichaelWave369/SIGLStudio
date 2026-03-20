@@ -1,0 +1,1 @@
+Place platform app icons here (png/icns/ico) for polished desktop packaging.
