@@ -9,6 +9,7 @@ import { PresentationSourcePicker } from "@/components/presentation-source-picke
 import { getCurrentSource } from "@/lib/studioStorage";
 import { createPresentationConfig } from "@/lib/presentationConfig";
 import { downloadTextFile } from "@/lib/utils";
+import { ThemePicker } from "@/components/theme-picker";
 
 export function PresentationWorkspace() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export function PresentationWorkspace() {
   const [index, setIndex] = useState(0);
   const [cleanMode, setCleanMode] = useState(false);
   const [focusMode, setFocusMode] = useState<"symbol-first" | "analysis-first" | "balanced">("balanced");
+  const [themeId, setThemeId] = useState("observatory");
 
   const config = useMemo(
     () =>
@@ -55,8 +57,9 @@ export function PresentationWorkspace() {
             <option value="analysis-first">analysis-first</option>
             <option value="balanced">balanced</option>
           </select>
+          <ThemePicker value={themeId} onChange={setThemeId} />
           <PresentationModeToggle cleanMode={cleanMode} onToggle={() => setCleanMode((v) => !v)} />
-          <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => downloadTextFile("presentation-config.json", JSON.stringify(config, null, 2))}>Export Config</button>
+          <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => downloadTextFile("presentation-config.json", JSON.stringify({ ...config, theme_id: themeId }, null, 2))}>Export Config</button>
         </div>
       ) : null}
       <PresentationSlide slide={slide} focusMode={focusMode} showPanels={!cleanMode} />

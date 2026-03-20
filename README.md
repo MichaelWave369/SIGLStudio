@@ -1,34 +1,36 @@
-# SIGLStudio v0.4
+# SIGLStudio v0.5
 
-SIGLStudio is a local-first symbolic studio for composing, inspecting, comparing, organizing, presenting, and exporting SIGL.
+SIGLStudio is a local-first symbolic studio for composing, comparing, presenting, reviewing, and handing off SIGL work.
 
-> **Architecture boundary:** Vibe owns canonical parsing/lowering/verification truth. SIGLStudio owns UI workflows, visualization, organization, presentation, and local exports.
+> **Architecture boundary:** Vibe owns canonical parsing/lowering/verification truth. SIGLStudio owns UX, visualization, sessions, boards, review packs, and local handoff/export workflows.
 
-## What’s new in v0.4
-- **Presentation Mode** (`/present`): distraction-reduced walkthrough slides with keyboard controls.
-- **Guided Sessions** (`/sessions`): ordered symbolic workflows with checkpoints and local progress.
-- **Artifact Templates** (`/artifacts`): poster/card/static SVG template exports + JSON template configs.
-- **Provenance/Trace Alignment**: reusable provenance cards and trace summaries across inspect/diff/batch/projects.
+## What’s new in v0.5
+- **Boards / Canvas** (`/boards`) for freeform symbolic block layout.
+- **Theme system** (Observatory, Monolith, Lattice, Quiet Paper) for presentation/artifact/review styling.
+- **Review Packs** (`/review-packs`) for deterministic project review bundle generation.
+- **Handoff formats** (`.siglboard.json`, `.siglreview.json`, etc.) with integrity validation.
+- **Deeper provenance normalization** with local-vs-engine metadata grouping.
+- **Non-interactive linting** via explicit ESLint flat config + `eslint` script.
 
-## Route overview
+## Routes
 - `/` landing
 - `/compose`, `/validate`, `/atlas`, `/sequences`, `/export`
 - `/diff`, `/batch`, `/projects`
 - `/present`, `/sessions`, `/artifacts`
+- `/boards`, `/review-packs`
 
-## Local-first workflow guarantees
+## Local-first guarantees
+- No cloud backend
 - No auth
 - No database requirement
-- No cloud backend required
-- Mock engine mode remains first-class
+- Mock mode remains first-class
 - Optional Vibe CLI bridge only
 
-## Presentation and session exports
-- Presentation config JSON
-- Session definition JSON
-- Session progress/summaries JSON
-- Artifact template config JSON
-- SVG artifact output
+## File-based handoff
+Handoff payloads include explicit type, version, created_at, source context, integrity hash, notes/theme, and route-aware validation/import.
+
+## Tooling
+`npm run lint` now runs non-interactively via ESLint CLI and flat config.
 
 ## Setup
 ```bash
@@ -36,16 +38,17 @@ npm install
 npm run dev
 ```
 
-## Test commands
+## Validation
 ```bash
 npm run lint
 npm run test
+npm run build
 ```
 
-## Limitations (honest)
-- PNG export is deferred in v0.4 for reliability.
-- Presentation mode is lightweight and deterministic (not a full slideshow engine).
-- Provenance displays local/mock metadata unless richer Vibe provenance is available.
+## Limitations
+- Boards are bounded/local and intentionally simple (not an infinite whiteboard engine).
+- No realtime collaboration; handoff is file-based only.
+- PNG artifact export remains deferred for reliability.
 
 ## Docs
 - `docs/roadmap.md`

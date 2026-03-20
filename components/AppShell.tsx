@@ -22,7 +22,9 @@ const nav = [
   ["/projects", "Projects"],
   ["/present", "Present"],
   ["/sessions", "Sessions"],
-  ["/artifacts", "Artifacts"]
+  ["/artifacts", "Artifacts"],
+  ["/boards", "Boards"],
+  ["/review-packs", "Review Packs"]
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -37,7 +39,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 mb-6 rounded-2xl border border-line bg-[#090d17]/90 p-4 backdrop-blur">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.4</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.5</p>
             <h1 className="text-2xl font-semibold">Symbolic Observatory</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2">

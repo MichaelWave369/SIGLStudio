@@ -9,7 +9,7 @@ import { sessionToPresentation } from "@/lib/presentationConfig";
 
 export default function SessionsPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const sessions = useMemo(() => getSessions(), [selectedId]);
+  const sessions = useMemo(() => getSessions(), []);
   const selected = sessions.find((s) => s.id === selectedId) ?? sessions[0] ?? null;
 
   if (!selected) {

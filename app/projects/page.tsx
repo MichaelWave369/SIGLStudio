@@ -8,7 +8,7 @@ import { getProjects } from "@/lib/projectStorage";
 
 export default function ProjectsPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const projects = useMemo(() => getProjects(), [selectedId]);
+  const projects = useMemo(() => getProjects(), []);
   const selected = projects.find((project) => project.id === selectedId) ?? null;
 
   if (selected) {

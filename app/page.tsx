@@ -5,23 +5,23 @@ export default function HomePage() {
     <main className="space-y-6">
       <section className="panel space-y-4 p-8">
         <p className="text-sm uppercase tracking-[0.2em] text-accent">Visual SIGL Workbench</p>
-        <h2 className="text-4xl font-semibold leading-tight">SIGLStudio is a visual symbolic studio for composing, exploring, validating, inspecting, comparing, presenting, and exporting SIGL.</h2>
+        <h2 className="text-4xl font-semibold leading-tight">SIGLStudio is a visual symbolic studio for composing, inspecting, comparing, presenting, reviewing, and handing off SIGL work.</h2>
         <p className="max-w-3xl text-muted">
-          v0.4 introduces presentation mode, guided sessions, artifact templates, and stronger provenance visibility across analysis surfaces.
+          v0.5 adds Boards/Canvas mode, richer themes, review packs, deeper provenance normalization, file-based handoff formats, and CI-safe lint tooling.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link href="/present" className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-accent">Start Presentation</Link>
-          <Link href="/sessions" className="rounded-xl border border-line px-4 py-2">Open Sessions</Link>
-          <Link href="/artifacts" className="rounded-xl border border-line px-4 py-2">Build Artifacts</Link>
+          <Link href="/boards" className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-accent">Open Boards</Link>
+          <Link href="/review-packs" className="rounded-xl border border-line px-4 py-2">Review Packs</Link>
+          <Link href="/present" className="rounded-xl border border-line px-4 py-2">Present</Link>
         </div>
       </section>
       <section className="grid gap-4 md:grid-cols-5">
         {[
-          ["Present", "Distraction-reduced walkthrough with keyboard controls."],
-          ["Sessions", "Guided step orchestration with checkpoints and notes."],
-          ["Artifacts", "Poster/card SVG templates plus config JSON exports."],
-          ["Provenance", "Unified provenance/trace cards across analysis views."],
-          ["Projects", "Local project organization and integrity metadata."]
+          ["Boards", "Spatial symbolic composition with block-level inspection."],
+          ["Themes", "Observatory, Monolith, Lattice, Quiet Paper presets."],
+          ["Review Packs", "Deterministic project review bundle generation."],
+          ["Handoff", "File-based handoff bundles with integrity checks."],
+          ["Provenance", "Local vs engine metadata normalization panels."]
         ].map(([title, body]) => (
           <article key={title} className="panel">
             <h3 className="font-semibold">{title}</h3>
