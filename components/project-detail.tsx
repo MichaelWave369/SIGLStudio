@@ -6,6 +6,8 @@ import { packHash } from "@/lib/projectPack";
 import { ProjectIntegrityCard } from "@/components/project-integrity-card";
 import { downloadTextFile } from "@/lib/utils";
 import { buildProjectIntegritySummary } from "@/lib/reportExport";
+import { ProvenanceCard } from "@/components/provenance-card";
+import { buildProvenance } from "@/lib/provenance";
 
 export function ProjectDetail({ project, onBack }: { project: ProjectPack; onBack: () => void }) {
   const renameItem = (id: string) => {
@@ -45,7 +47,10 @@ export function ProjectDetail({ project, onBack }: { project: ProjectPack; onBac
             <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => downloadTextFile(`${project.name}.integrity.json`, JSON.stringify(buildProjectIntegritySummary(project), null, 2))}>Export Integrity Summary</button>
           </div>
         </div>
-        <ProjectIntegrityCard project={project} />
+        <div className="space-y-4">
+          <ProjectIntegrityCard project={project} />
+          <ProvenanceCard meta={buildProvenance({ engine_mode: project.engine_mode_last_used, mode_reason: "Project pack local metadata", pack_hash: project.pack_hash, obligation_count: 0, issue_count: 0 })} />
+        </div>
       </div>
     </div>
   );

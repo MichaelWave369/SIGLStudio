@@ -173,3 +173,72 @@ export interface RelationEdge {
   to: string;
   label: "related" | "paired" | "state-adjacent" | "operator-neighbor" | "example-associated";
 }
+
+export type SessionStepType = "compose" | "inspect" | "validate" | "compare" | "reflect" | "export" | "present";
+
+export interface SessionCheckpoint {
+  id: string;
+  label: string;
+  completed: boolean;
+}
+
+export interface SessionStep {
+  id: string;
+  type: SessionStepType;
+  title: string;
+  note: string;
+  linkedSource?: string;
+  checkpoints: SessionCheckpoint[];
+}
+
+export interface GuidedSession {
+  id: string;
+  title: string;
+  description: string;
+  steps: SessionStep[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SessionProgress {
+  sessionId: string;
+  currentStepIndex: number;
+  completedCheckpointIds: string[];
+}
+
+export type PresentationFocusMode = "symbol-first" | "analysis-first" | "balanced";
+
+export interface PresentationConfig {
+  id: string;
+  title: string;
+  sourceType: "compose" | "sequence" | "diff" | "batch" | "project" | "session";
+  slides: Array<{ id: string; title: string; source: string; notes?: string }>;
+  focusMode: PresentationFocusMode;
+  cleanMode: boolean;
+  created_at: string;
+}
+
+export type ArtifactType = "poster" | "symbol-card" | "sequence-card" | "diff-card" | "project-overview";
+
+export interface ArtifactTemplateConfig {
+  id: string;
+  type: ArtifactType;
+  title: string;
+  subtitle: string;
+  source: string;
+  notes?: string;
+  metadata?: Record<string, string | number | boolean>;
+}
+
+export interface ProvenanceMeta {
+  engine_mode: EngineMode;
+  mode_reason: string;
+  source_hash?: string;
+  item_hash?: string;
+  pack_hash?: string;
+  export_version: string;
+  created_at: string;
+  obligation_count?: number;
+  issue_count?: number;
+  normalized_shape_version?: string;
+}

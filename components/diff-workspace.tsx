@@ -10,6 +10,8 @@ import { summarizeDiff } from "@/lib/diffInspect";
 import type { DiffInspectionSnapshot } from "@/lib/types";
 import { downloadTextFile } from "@/lib/utils";
 import { buildDiffReport } from "@/lib/reportExport";
+import { ProvenanceCard } from "@/components/provenance-card";
+import { buildProvenance } from "@/lib/provenance";
 
 export function DiffWorkspace() {
   const [leftSource, setLeftSource] = useState("⟨ Φ ∴ ☉ ⟩");
@@ -57,6 +59,10 @@ export function DiffWorkspace() {
         <DiffInspectionPane snapshot={right} />
       </div>
       <DiffSummaryCard summary={summary} />
+      <div className="grid gap-4 md:grid-cols-2">
+        <ProvenanceCard meta={buildProvenance({ engine_mode: left?.validation?.mode ?? "mock", mode_reason: left?.validation?.modeReason ?? "left unavailable", source_hash: left?.sourceHash, obligation_count: left?.validation?.obligations.length, issue_count: left?.validation?.issues.length })} />
+        <ProvenanceCard meta={buildProvenance({ engine_mode: right?.validation?.mode ?? "mock", mode_reason: right?.validation?.modeReason ?? "right unavailable", source_hash: right?.sourceHash, obligation_count: right?.validation?.obligations.length, issue_count: right?.validation?.issues.length })} />
+      </div>
     </div>
   );
 }

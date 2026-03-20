@@ -5,23 +5,23 @@ export default function HomePage() {
     <main className="space-y-6">
       <section className="panel space-y-4 p-8">
         <p className="text-sm uppercase tracking-[0.2em] text-accent">Visual SIGL Workbench</p>
-        <h2 className="text-4xl font-semibold leading-tight">SIGLStudio is a visual symbolic studio for composing, exploring, validating, inspecting, comparing, and exporting SIGL.</h2>
+        <h2 className="text-4xl font-semibold leading-tight">SIGLStudio is a visual symbolic studio for composing, exploring, validating, inspecting, comparing, presenting, and exporting SIGL.</h2>
         <p className="max-w-3xl text-muted">
-          v0.3 focuses on analysis and project workflows: semantic diff, batch runs, atlas relation graphing, and local project packs with integrity metadata.
+          v0.4 introduces presentation mode, guided sessions, artifact templates, and stronger provenance visibility across analysis surfaces.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link href="/compose" className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-accent">Open Composer</Link>
-          <Link href="/projects" className="rounded-xl border border-line px-4 py-2">Open Projects</Link>
-          <span className="rounded-xl border border-line px-4 py-2 text-sm text-muted">Tip: Press Ctrl/Cmd + K</span>
+          <Link href="/present" className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-accent">Start Presentation</Link>
+          <Link href="/sessions" className="rounded-xl border border-line px-4 py-2">Open Sessions</Link>
+          <Link href="/artifacts" className="rounded-xl border border-line px-4 py-2">Build Artifacts</Link>
         </div>
       </section>
       <section className="grid gap-4 md:grid-cols-5">
         {[
-          ["Diff", "Compare two sigils with semantic summary cards."],
-          ["Batch", "Run validate/inspect workflows over multiple rows."],
-          ["Atlas Graph", "Explore symbol neighborhoods and relation labels."],
-          ["Projects", "Create/import/export project packs with integrity hashes."],
-          ["Export", "Deterministic report and bundle metadata outputs."]
+          ["Present", "Distraction-reduced walkthrough with keyboard controls."],
+          ["Sessions", "Guided step orchestration with checkpoints and notes."],
+          ["Artifacts", "Poster/card SVG templates plus config JSON exports."],
+          ["Provenance", "Unified provenance/trace cards across analysis views."],
+          ["Projects", "Local project organization and integrity metadata."]
         ].map(([title, body]) => (
           <article key={title} className="panel">
             <h3 className="font-semibold">{title}</h3>

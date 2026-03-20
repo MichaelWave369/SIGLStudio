@@ -1,42 +1,34 @@
-# SIGLStudio v0.3
+# SIGLStudio v0.4
 
-SIGLStudio is a local-first symbolic studio for composing, exploring, validating, inspecting, comparing, organizing, and exporting SIGL.
+SIGLStudio is a local-first symbolic studio for composing, inspecting, comparing, organizing, presenting, and exporting SIGL.
 
-> **Architecture boundary:** SIGLStudio is the product/UI layer. Vibe remains canonical for parsing, lowering, verification, and proof truth.
+> **Architecture boundary:** Vibe owns canonical parsing/lowering/verification truth. SIGLStudio owns UI workflows, visualization, organization, presentation, and local exports.
 
-## What’s new in v0.3
-- **Inspect Diff Mode** (`/diff`) for side-by-side semantic comparison.
-- **Batch Workflows** (`/batch`) for running validate/inspect across multiple sigils.
-- **Atlas Relation Graph** (`/atlas`) for symbolic neighborhoods and relation labels.
-- **Project Packs** (`/projects`) for durable local organization with deterministic integrity metadata.
-- Export/report additions for diff, batch, project pack, and integrity summary JSON.
+## What’s new in v0.4
+- **Presentation Mode** (`/present`): distraction-reduced walkthrough slides with keyboard controls.
+- **Guided Sessions** (`/sessions`): ordered symbolic workflows with checkpoints and local progress.
+- **Artifact Templates** (`/artifacts`): poster/card/static SVG template exports + JSON template configs.
+- **Provenance/Trace Alignment**: reusable provenance cards and trace summaries across inspect/diff/batch/projects.
 
-## Routes
+## Route overview
 - `/` landing
-- `/compose` compose + inspect workspace
-- `/validate` validation workspace
-- `/atlas` list + relation graph view
-- `/sequences` temporal sequence editor
-- `/export` deterministic export center
-- `/diff` semantic diff workspace
-- `/batch` multi-item validate/inspect workflow
-- `/projects` local project pack manager
+- `/compose`, `/validate`, `/atlas`, `/sequences`, `/export`
+- `/diff`, `/batch`, `/projects`
+- `/present`, `/sessions`, `/artifacts`
 
-## Local-first project packs
-Project packs include:
-- metadata (`name`, `description`, `created_at`, `updated_at`, `version`, `engine_mode_last_used`)
-- item collection (`sigils`, `sequences`, `notes`)
-- integrity (`pack_hash`, item hashes, `export_version`)
+## Local-first workflow guarantees
+- No auth
+- No database requirement
+- No cloud backend required
+- Mock engine mode remains first-class
+- Optional Vibe CLI bridge only
 
-Project pack import includes deterministic validation guards.
-
-## Engine behavior
-- Mock mode is first-class and always available.
-- Optional Vibe CLI bridge can be enabled with:
-  ```bash
-  ENABLE_VIBE_CLI=true npm run dev
-  ```
-- All adapter calls normalize outputs into compare-able/stable shapes for diff and batch workflows.
+## Presentation and session exports
+- Presentation config JSON
+- Session definition JSON
+- Session progress/summaries JSON
+- Artifact template config JSON
+- SVG artifact output
 
 ## Setup
 ```bash
@@ -44,20 +36,16 @@ npm install
 npm run dev
 ```
 
-## Testing
+## Test commands
 ```bash
 npm run lint
 npm run test
 ```
 
-## Keyboard / command UX
-- Command palette: `Ctrl/Cmd + K`
-- Glyph insertion: `Alt + [1..0,-,q,w,e,r,t]`
-
-## Limitations
-- Mock mode remains heuristic and non-canonical.
-- Relation graph uses deterministic static layout (not physics-heavy).
-- No cloud sync/auth/database.
+## Limitations (honest)
+- PNG export is deferred in v0.4 for reliability.
+- Presentation mode is lightweight and deterministic (not a full slideshow engine).
+- Provenance displays local/mock metadata unless richer Vibe provenance is available.
 
 ## Docs
 - `docs/roadmap.md`
