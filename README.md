@@ -1,29 +1,53 @@
 # SIGLStudio
 
-SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, visualization, comparison, review, boards, artifacts, handoff, templates, analytics, automation, publishing bundles, and workstation UX.
+SIGLStudio is the local-first workstation and product layer for SIGL.
 
-Vibe remains canonical for parsing, lowering, verification, proof truth, and engine-side provenance.
+It provides practical tooling for compose/inspect/validate, comparison, review, analytics, publishing bundles, and deterministic handoff exports.
 
-## v0.9 highlights
+## Relationship to Vibe (important)
 
-- Publishing Bundles route (`/publishing`) with deterministic bundle manifests/summaries.
-- Reusable pipeline blueprints with instantiation/export and local blueprint copies.
-- Desktop finalization pass with runtime/about/open-recent surfaces and cleaned docs.
-- Automation packs + dry-run guardrail reporting for safer repeatable workflows.
-- 1.0 readiness cohesion pass with next-step guidance and tighter workflow surfaces.
+- **Vibe** is canonical for parsing, lowering, verification, proof truth, and engine-side provenance.
+- **SIGLStudio** focuses on editing, visualization, workflow orchestration, review/publishing UX, and local deterministic packaging.
 
-## Core routes
+SIGLStudio does **not** replace canonical verification logic.
 
-- `/compose` / `/validate` / `/atlas` / `/sequences` / `/export`
-- `/diff` / `/batch` / `/projects` / `/sessions` / `/present`
-- `/artifacts` / `/boards` / `/review-packs` / `/review-flows`
-- `/analytics` / `/recipes` / `/publishing`
+## What SIGLStudio is / is not
 
-## Desktop mode (optional)
+### Is
+- local-first workstation
+- deterministic manifest-oriented tooling
+- browser-first with optional desktop runtime
+- mock-mode friendly for offline/local workflows
 
-See `desktop/README.md` for optional Electron setup and polished workflow notes.
+### Is not
+- cloud backend
+- auth system
+- realtime collaboration platform
+- unrestricted plugin runtime
 
-## Local run commands
+## Local-first guarantee
+
+SIGLStudio prioritizes local files, local storage, explicit exports, and deterministic serialization.
+
+## Major routes
+
+- `/compose` `/validate` `/atlas` `/sequences` `/export`
+- `/diff` `/batch` `/projects` `/sessions` `/present`
+- `/boards` `/review-packs` `/review-flows` `/artifacts`
+- `/analytics` `/recipes` `/publishing`
+
+## Browser vs desktop mode
+
+- Browser mode is default and fully supported.
+- Desktop mode is optional (`Electron`) for local file ergonomics.
+- See `docs/desktop.md` and `desktop/README.md`.
+
+## Mock mode vs Vibe mode
+
+- Mock mode remains first-class for local/offline usability.
+- Vibe integration is optional and used when available.
+
+## Install / run / build
 
 ```bash
 npm install
@@ -33,10 +57,23 @@ npm run test
 npm run build
 ```
 
-## Additional docs
+Optional desktop run (after installing Electron as dev dependency):
 
-- `docs/publishing-bundles.md`
-- `docs/pipeline-blueprints.md`
-- `docs/automation-packs.md`
-- `docs/desktop-workflow.md`
-- `docs/readiness-v1.md`
+```bash
+npm run desktop:dev
+```
+
+## Limitations (honest)
+
+See `docs/known-limitations.md`.
+
+## Docs index
+
+- `docs/architecture.md`
+- `docs/workflows.md`
+- `docs/desktop.md`
+- `docs/import-export.md`
+- `docs/publishing.md`
+- `docs/automation.md`
+- `docs/known-limitations.md`
+- `docs/launch-checklist.md`

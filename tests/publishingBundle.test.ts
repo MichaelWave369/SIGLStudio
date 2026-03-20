@@ -5,7 +5,7 @@ describe("publishing bundle", () => {
   it("creates deterministic included ordering", () => {
     const bundle = createPublishingBundle({ bundle_type: "review-bundle", title: "B", subtitle: "", description: "", source_context: "review", included_items: ["z", "a"], theme_id: "observatory", provenance_summary: "", notes: "", next_actions: [] });
     expect(bundle.included_items).toEqual(["a", "z"]);
-    expect(bundle.export_version).toBe("0.9");
+    expect(bundle.export_version).toBe("1.0");
   });
 
   it("builds summary output", () => {

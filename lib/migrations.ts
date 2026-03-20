@@ -4,10 +4,10 @@ import { migrateExtensionPack } from "@/lib/extensionPackMigrations";
 
 export function migrateLegacyBoard(input: unknown): Record<string, unknown> {
   const raw = asRecord(input);
-  if (!raw) return { schema_version: "0.9", blocks: [] };
+  if (!raw) return { schema_version: "1.0", blocks: [] };
 
   const legacy = { ...raw };
-  if (!legacy.schema_version) legacy.schema_version = "0.9";
+  if (!legacy.schema_version) legacy.schema_version = "1.0";
   if (!Array.isArray(legacy.layers)) {
     legacy.layers = [{ id: "default", title: "Default", visible: true, locked: false }];
   }

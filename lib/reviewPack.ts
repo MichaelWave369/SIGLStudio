@@ -27,7 +27,7 @@ export function createReviewPack(input: { project_id: string; title: string; not
     { id: "next-actions", title: "Next Actions", content: "Recommended follow-up", order: 7 }
   ];
   const pack_hash = stableHash(JSON.stringify({ input, sections }));
-  return { id: crypto.randomUUID(), project_id: input.project_id, title: input.title, notes: input.notes, included_items: input.included_items, sections, created_at: now, updated_at: now, pack_hash, theme_id: input.theme_id ?? "observatory", schema_version: "0.9" };
+  return { id: crypto.randomUUID(), project_id: input.project_id, title: input.title, notes: input.notes, included_items: input.included_items, sections, created_at: now, updated_at: now, pack_hash, theme_id: input.theme_id ?? "observatory", schema_version: "1.0" };
 }
 
 export function validateReviewPack(input: unknown): { valid: boolean; reason?: string; pack?: ReviewPack } {

@@ -20,6 +20,16 @@ export function dryRunAutomationPack(pack: AutomationPack, sourceAvailable = tru
     reports: recipeReports,
     action_count: recipeReports.reduce((acc, r) => acc + r.action_count, 0),
     created_at: new Date().toISOString(),
-    export_version: "0.9"
+    export_version: "1.0"
   };
+}
+
+
+export function validateAutomationPack(input: unknown): { valid: boolean; errors: string[] } {
+  const raw = input as AutomationPack;
+  const errors: string[] = [];
+  if (!raw || typeof raw !== "object") errors.push("Pack is not an object.");
+  if (!raw?.name) errors.push("Pack name missing.");
+  if (!Array.isArray(raw?.recipes)) errors.push("Pack recipes missing.");
+  return { valid: errors.length === 0, errors };
 }

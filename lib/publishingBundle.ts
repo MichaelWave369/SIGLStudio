@@ -22,17 +22,25 @@ export function createPublishingBundle(input: {
     included_items,
     integrity_hash,
     created_at,
-    export_version: "0.9"
+    export_version: "1.0"
   };
 }
 
 export function bundleSummary(bundle: PublishingBundle) {
   return {
-    export_version: "0.9",
+    export_version: "1.0",
     created_at: bundle.created_at,
     bundle_type: bundle.bundle_type,
     included_item_count: bundle.included_items.length,
     integrity_hash: bundle.integrity_hash,
     theme_id: bundle.theme_id
   };
+}
+
+
+export function validatePublishingBundle(input: unknown): { valid: boolean; reason?: string } {
+  const raw = input as PublishingBundle;
+  if (!raw || typeof raw !== "object") return { valid: false, reason: "Not an object." };
+  if (!raw.bundle_type || !Array.isArray(raw.included_items) || !raw.integrity_hash) return { valid: false, reason: "Missing bundle fields." };
+  return { valid: true };
 }

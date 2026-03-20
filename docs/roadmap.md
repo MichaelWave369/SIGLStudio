@@ -1,17 +1,7 @@
-# Roadmap
+# Post-1.0 roadmap (high-level)
 
-## v0.9 (current)
-
-- publishing bundle builder + deterministic manifest/summary exports
-- reusable pipeline blueprints with local copy/instantiation flows
-- desktop finalization pass (about/open-recent/actions/docs)
-- automation packs with dry-run guardrail reports
-- 1.0 readiness cohesion pass (next-step guidance + tighter shell context)
-
-## v1.0 direction
-
-- launch polish and final docs sweep
-- curated screenshots/demo assets
-- release notes and public positioning package
-- final package/install instructions
-- stability sweep across publishing/pipeline/automation paths
+- optional desktop packaging refinement and install ergonomics
+- curated demo assets and launch docs polish
+- deeper composition presets driven by real user feedback
+- stability + migration hardening as schemas evolve
+- bounded local extension ergonomics improvements

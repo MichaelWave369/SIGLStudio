@@ -1,13 +1,11 @@
 import { AnalyticsDashboard } from "@/components/analytics-dashboard";
 import { SendToMenu } from "@/components/send-to-menu";
+import { PageIntro } from "@/components/page-intro";
 
 export default function AnalyticsPage() {
   return (
     <main className="space-y-4">
-      <div className="panel">
-        <h2 className="text-xl font-semibold">Analytics Dashboard</h2>
-        <p className="mt-2 text-sm text-muted">Local dashboard-style analytics summaries from available proof/report data.</p>
-      </div>
+      <PageIntro title="Analytics Dashboard" description="Use local, deterministic analytics summaries to inspect obligations, issues, and review-health signals." />
       <SendToMenu source="analytics" />
       <AnalyticsDashboard />
     </main>
