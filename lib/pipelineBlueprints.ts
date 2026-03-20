@@ -36,5 +36,17 @@ export function instantiateBlueprint(input: { blueprint: PipelineBlueprint; sour
 
 export function validatePipelineBlueprint(input: unknown): input is PipelineBlueprint {
   const raw = input as PipelineBlueprint;
-  return Boolean(raw && raw.id && raw.source_type && Array.isArray(raw.outputs) && raw.schema_version);
+  return Boolean(
+    raw &&
+      typeof raw.id === "string" &&
+      typeof raw.title === "string" &&
+      typeof raw.source_type === "string" &&
+      Array.isArray(raw.outputs) &&
+      raw.outputs.length > 0 &&
+      Array.isArray(raw.transformation_sequence) &&
+      raw.transformation_sequence.length > 0 &&
+      typeof raw.theme_default === "string" &&
+      typeof raw.schema_version === "string" &&
+      typeof raw.origin === "string"
+  );
 }

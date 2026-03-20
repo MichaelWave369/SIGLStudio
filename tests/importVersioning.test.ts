@@ -7,7 +7,12 @@ describe("import versioning", () => {
   });
 
   it("warns on newer payloads", () => {
-    const summary = validateImportVersion({ kind: "board", schema_version: "0.7" });
+    const summary = validateImportVersion({ kind: "board", schema_version: "1.1" });
     expect(summary.warnings.length).toBeGreaterThan(0);
+  });
+
+  it("does not warn for known v1.0 payloads", () => {
+    const summary = validateImportVersion({ kind: "board", schema_version: "1.0" });
+    expect(summary.warnings).toEqual([]);
   });
 });

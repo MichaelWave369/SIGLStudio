@@ -1,4 +1,4 @@
-# Desktop packaging (v0.9)
+# Desktop packaging (v1.0)
 
 SIGLStudio keeps web mode as default. Desktop mode is optional and intended for local-first review workflows.
 
@@ -17,6 +17,7 @@ SIGLStudio keeps web mode as default. Desktop mode is optional and intended for 
 - Open Recent panel surfaces local file continuity.
 - Desktop actions panel documents top-level runtime-specific affordances.
 - Icon placeholder path: `desktop/icon-placeholder.txt`.
+- Packaging metadata and icon assets are intentionally placeholders until signed distribution is configured.
 
 ## Build/run notes
 

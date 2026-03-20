@@ -56,10 +56,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.9</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGLStudio v1.0</p>
               <RuntimeBadge />
             </div>
-            <h1 className="text-2xl font-semibold">1.0 Readiness and Publishing Bundles</h1>
+            <h1 className="text-2xl font-semibold">Local-first symbolic workstation</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <GlobalEngineStatus />
@@ -68,7 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <SettingsPanel />
           </div>
         </div>
-        <p className="mb-2 text-xs text-muted">Context: {pathname}</p>
+        <p className="mb-2 text-xs text-muted">Context: {pathname} · Tips: use ⌘/Ctrl+K for commands and Alt+key in editors for glyph shortcuts.</p>
         <WorkflowJumpMenu />
         <nav className="mt-2 flex flex-wrap gap-2">
           {nav.map(([href, label]) => (

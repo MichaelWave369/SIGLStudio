@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { bundleSummary, createPublishingBundle } from "@/lib/publishingBundle";
+import { bundleSummary, createPublishingBundle, validatePublishingBundle } from "@/lib/publishingBundle";
 
 describe("publishing bundle", () => {
   it("creates deterministic included ordering", () => {
@@ -11,5 +11,11 @@ describe("publishing bundle", () => {
   it("builds summary output", () => {
     const bundle = createPublishingBundle({ bundle_type: "archive-bundle", title: "B", subtitle: "", description: "", source_context: "review", included_items: [], theme_id: "observatory", provenance_summary: "", notes: "", next_actions: [] });
     expect(bundleSummary(bundle).bundle_type).toBe("archive-bundle");
+  });
+
+  it("rejects missing title in validation", () => {
+    const bundle = createPublishingBundle({ bundle_type: "archive-bundle", title: "B", subtitle: "", description: "", source_context: "review", included_items: [], theme_id: "observatory", provenance_summary: "", notes: "", next_actions: [] });
+    const summary = validatePublishingBundle({ ...bundle, title: " " });
+    expect(summary.valid).toBe(false);
   });
 });

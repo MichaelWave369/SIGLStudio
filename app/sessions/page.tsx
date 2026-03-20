@@ -6,6 +6,7 @@ import { SessionRunner } from "@/components/session-runner";
 import { createSession, getSessions, saveSessions, sessionSummaryHash, validateSessionImport } from "@/lib/sessionStorage";
 import { downloadTextFile } from "@/lib/utils";
 import { sessionToPresentation } from "@/lib/presentationConfig";
+import { PageIntro } from "@/components/page-intro";
 
 export default function SessionsPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -15,10 +16,9 @@ export default function SessionsPage() {
   if (!selected) {
     return (
       <main className="space-y-4">
+        <PageIntro title="Guided Sessions" description="Create deterministic symbolic walkthrough sessions with checkpoints." cta="Tip: create a starter session, then export as presentation JSON." />
         <div className="panel">
-          <h2 className="text-xl font-semibold">Guided Sessions</h2>
-          <p className="mt-2 text-sm text-muted">Create deterministic symbolic walkthrough sessions with checkpoints.</p>
-          <button className="mt-3 rounded border border-line px-3 py-1 text-sm" onClick={() => { createSession("Starter Session", "Onboarding flow"); setSelectedId(null); location.reload(); }}>Create Starter Session</button>
+          <button className="rounded border border-line px-3 py-1 text-sm" onClick={() => { createSession("Starter Session", "Onboarding flow"); setSelectedId(null); location.reload(); }}>Create Starter Session</button>
         </div>
       </main>
     );
@@ -32,8 +32,8 @@ export default function SessionsPage() {
 
   return (
     <main className="space-y-4">
+      <PageIntro title="Guided Sessions" description="Build and run deterministic symbolic walkthroughs, then export session or presentation payloads." />
       <div className="panel flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-xl font-semibold">Guided Sessions</h2>
         <div className="flex gap-2 text-sm">
           <button className="rounded border border-line px-3 py-1" onClick={() => { createSession(`Session ${sessions.length + 1}`, "New session"); location.reload(); }}>New</button>
           <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.session.json`, JSON.stringify(selected, null, 2))}>Export Session</button>

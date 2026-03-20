@@ -31,5 +31,10 @@ export function validateAutomationPack(input: unknown): { valid: boolean; errors
   if (!raw || typeof raw !== "object") errors.push("Pack is not an object.");
   if (!raw?.name) errors.push("Pack name missing.");
   if (!Array.isArray(raw?.recipes)) errors.push("Pack recipes missing.");
+  if (!raw?.schema_version) errors.push("Pack schema_version missing.");
+  if (!raw?.validation_policy) errors.push("Pack validation policy missing.");
+  if (Array.isArray(raw?.recipes) && raw.recipes.some((recipe) => !recipe.id || !recipe.schema_version || !Array.isArray(recipe.actions))) {
+    errors.push("One or more recipes are missing id/schema_version/actions.");
+  }
   return { valid: errors.length === 0, errors };
 }

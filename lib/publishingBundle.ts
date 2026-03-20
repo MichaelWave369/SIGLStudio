@@ -42,5 +42,9 @@ export function validatePublishingBundle(input: unknown): { valid: boolean; reas
   const raw = input as PublishingBundle;
   if (!raw || typeof raw !== "object") return { valid: false, reason: "Not an object." };
   if (!raw.bundle_type || !Array.isArray(raw.included_items) || !raw.integrity_hash) return { valid: false, reason: "Missing bundle fields." };
+  if (!raw.title?.trim()) return { valid: false, reason: "Bundle title is required." };
+  if (!raw.export_version) return { valid: false, reason: "Bundle export_version is required." };
+  if (!raw.created_at) return { valid: false, reason: "Bundle created_at timestamp is required." };
+  if (!Array.isArray(raw.next_actions)) return { valid: false, reason: "Bundle next_actions must be an array." };
   return { valid: true };
 }

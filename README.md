@@ -63,9 +63,22 @@ Optional desktop run (after installing Electron as dev dependency):
 npm run desktop:dev
 ```
 
+Production-like desktop launch (after `npm run build` and `npm run start`):
+
+```bash
+npm run desktop:start
+```
+
 ## Limitations (honest)
 
 See `docs/known-limitations.md`.
+
+## Post-1.0 roadmap direction
+
+- stronger import/export compatibility tooling
+- desktop packaging/distribution hardening
+- richer workflow templates and demo seeds
+- deeper optional Vibe bridge diagnostics (without shifting canonical verification ownership)
 
 ## Docs index
 
