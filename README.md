@@ -1,28 +1,27 @@
 # SIGLStudio
 
-SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, visualization, comparison, review, boards, artifacts, handoff, templates, analytics, and workstation UX.
+SIGLStudio is the local-first visual/product layer for SIGL. It focuses on editing, visualization, comparison, review, boards, artifacts, handoff, templates, analytics, automation, publishing bundles, and workstation UX.
 
 Vibe remains canonical for parsing, lowering, verification, proof truth, and engine-side provenance.
 
-## v0.8 highlights
+## v0.9 highlights
 
-- Deeper composition pipelines with previewable deterministic manifests and send-to actions.
-- Desktop polish: runtime-aware actions/help surfaces and clearer packaging notes.
-- Extension pack schema versioning + migration-aware import validation.
-- Dashboard-style analytics route (`/analytics`) with local deterministic filtering/metrics.
-- Optional local automation recipes route (`/recipes`) with explicit user-triggered runs.
-- Workflow snapshots and stronger route-aware workstation cohesion.
+- Publishing Bundles route (`/publishing`) with deterministic bundle manifests/summaries.
+- Reusable pipeline blueprints with instantiation/export and local blueprint copies.
+- Desktop finalization pass with runtime/about/open-recent surfaces and cleaned docs.
+- Automation packs + dry-run guardrail reporting for safer repeatable workflows.
+- 1.0 readiness cohesion pass with next-step guidance and tighter workflow surfaces.
 
 ## Core routes
 
 - `/compose` / `/validate` / `/atlas` / `/sequences` / `/export`
 - `/diff` / `/batch` / `/projects` / `/sessions` / `/present`
 - `/artifacts` / `/boards` / `/review-packs` / `/review-flows`
-- `/analytics` / `/recipes`
+- `/analytics` / `/recipes` / `/publishing`
 
 ## Desktop mode (optional)
 
-See `desktop/README.md` for optional Electron setup and polished workflow notes. Browser workflows remain first-class.
+See `desktop/README.md` for optional Electron setup and polished workflow notes.
 
 ## Local run commands
 
@@ -36,9 +35,8 @@ npm run build
 
 ## Additional docs
 
-- `docs/board-pipelines.md`
-- `docs/analytics-dashboard.md`
-- `docs/recipes.md`
-- `docs/extension-packs.md`
-- `docs/extensions.md`
-- `docs/review-templates.md`
+- `docs/publishing-bundles.md`
+- `docs/pipeline-blueprints.md`
+- `docs/automation-packs.md`
+- `docs/desktop-workflow.md`
+- `docs/readiness-v1.md`

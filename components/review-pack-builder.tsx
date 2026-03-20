@@ -64,8 +64,8 @@ export function ReviewPackBuilder() {
         <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/artifacts')}>To Artifact Set</button>
         <button className="rounded border border-line px-3 py-1" onClick={() => router.push('/boards')}>To Board</button>
         <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.siglreview.json`, JSON.stringify(selected, null, 2))}>Export Pack Config</button>
-        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.review-summary.json`, JSON.stringify({ export_version: "0.8", created_at: new Date().toISOString(), included_item_count: selected.included_items.length, theme_id: selected.theme_id, pack_hash: selected.pack_hash }, null, 2))}>Export Review Summary</button>
-        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.handoff.json`, JSON.stringify(createHandoff({ handoff_type: 'review-pack', source_context: 'review-packs', payload: selected as unknown as Record<string, unknown>, notes: selected.notes, theme_id: selected.theme_id, schema_version: '0.8' }), null, 2))}>Export Handoff</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.review-summary.json`, JSON.stringify({ export_version: "0.9", created_at: new Date().toISOString(), included_item_count: selected.included_items.length, theme_id: selected.theme_id, pack_hash: selected.pack_hash }, null, 2))}>Export Review Summary</button>
+        <button className="rounded border border-line px-3 py-1" onClick={() => downloadTextFile(`${selected.title}.handoff.json`, JSON.stringify(createHandoff({ handoff_type: 'review-pack', source_context: 'review-packs', payload: selected as unknown as Record<string, unknown>, notes: selected.notes, theme_id: selected.theme_id, schema_version: '0.9' }), null, 2))}>Export Handoff</button>
       </div>
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <ReviewPackSectionEditor pack={selected} onChange={persist} />

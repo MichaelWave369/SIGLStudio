@@ -1,18 +1,17 @@
 # Roadmap
 
-## v0.8 (current)
+## v0.9 (current)
 
-- composition pipeline previews + deterministic manifests across board/review/artifact flows
-- polished desktop workflow surfaces (runtime cues, actions panel, packaging notes)
-- extension pack schema versioning with migration-aware import validation
-- dashboard-style local analytics route with deterministic filtering/metric cards
-- local automation recipes with explicit user-triggered run summaries
-- workflow snapshots and stronger send-to/start-from cohesion
+- publishing bundle builder + deterministic manifest/summary exports
+- reusable pipeline blueprints with local copy/instantiation flows
+- desktop finalization pass (about/open-recent/actions/docs)
+- automation packs with dry-run guardrail reports
+- 1.0 readiness cohesion pass (next-step guidance + tighter shell context)
 
-## v0.9 ideas
+## v1.0 direction
 
-- desktop packaging final polish across platform-specific icon/bundle metadata
-- advanced composition layouts and reusable pipeline blueprints
-- richer automation packs with stricter guardrails and validation
-- review publishing bundles for local handoff channels
-- optional local plugin manifest registry (still bounded and config-first)
+- launch polish and final docs sweep
+- curated screenshots/demo assets
+- release notes and public positioning package
+- final package/install instructions
+- stability sweep across publishing/pipeline/automation paths

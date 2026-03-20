@@ -48,6 +48,7 @@ export function CommandPalette() {
       { id: "go-review-flows", label: "Go to Review Flows", run: () => router.push("/review-flows") },
       { id: "go-analytics", label: "Go to Analytics", run: () => router.push("/analytics") },
       { id: "go-recipes", label: "Go to Recipes", run: () => router.push("/recipes") },
+      { id: "go-publishing", label: "Go to Publishing", run: () => router.push("/publishing") },
       { id: "go-extensions", label: "Open Extension Registry", run: () => router.push("/review-flows") },
       { id: "go-board-pipeline", label: "Open Board Pipelines", run: () => router.push("/boards") },
       { id: "insert-basic", label: "Insert basic sigil example", run: () => setCurrentSource(sigilExamples.basic) },

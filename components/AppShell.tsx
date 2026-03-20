@@ -16,6 +16,9 @@ import { RecentItemsPanel } from "@/components/recent-items-panel";
 import { WorkflowSnapshotPanel } from "@/components/workflow-snapshot-panel";
 import { pushWorkflowSnapshot } from "@/lib/workflowSnapshots";
 import { DesktopActionsPanel } from "@/components/desktop-actions-panel";
+import { DesktopAboutPanel } from "@/components/desktop-about-panel";
+import { OpenRecentMenu } from "@/components/open-recent-menu";
+import { NextStepPanel } from "@/components/next-step-panel";
 
 const nav = [
   ["/", "Home"],
@@ -34,7 +37,8 @@ const nav = [
   ["/review-packs", "Review Packs"],
   ["/review-flows", "Review Flows"],
   ["/analytics", "Analytics"],
-  ["/recipes", "Recipes"]
+  ["/recipes", "Recipes"],
+  ["/publishing", "Publishing"]
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -52,10 +56,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.8</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted">SIGL Studio v0.9</p>
               <RuntimeBadge />
             </div>
-            <h1 className="text-2xl font-semibold">Composition Pipelines & Workstation Polish</h1>
+            <h1 className="text-2xl font-semibold">1.0 Readiness and Publishing Bundles</h1>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <GlobalEngineStatus />
@@ -81,12 +85,15 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
       </header>
-      <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
+      <div className="grid gap-4 lg:grid-cols-[1fr_300px]">
         <div>{children}</div>
         <aside className="space-y-4">
+          <NextStepPanel />
           <RecentItemsPanel />
+          <OpenRecentMenu />
           <WorkflowSnapshotPanel />
           <DesktopActionsPanel />
+          <DesktopAboutPanel />
         </aside>
       </div>
     </div>

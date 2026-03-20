@@ -404,3 +404,51 @@ export interface WorkflowSnapshot {
   label: string;
   created_at: string;
 }
+
+export type PublishingBundleType = "review-bundle" | "presentation-bundle" | "project-handoff-bundle" | "board-snapshot-bundle" | "research-bundle" | "archive-bundle";
+
+export interface PublishingBundle {
+  id: string;
+  bundle_type: PublishingBundleType;
+  title: string;
+  subtitle: string;
+  description: string;
+  source_context: string;
+  included_items: string[];
+  theme_id: string;
+  provenance_summary: string;
+  notes: string;
+  next_actions: string[];
+  integrity_hash: string;
+  created_at: string;
+  export_version: string;
+}
+
+export interface PipelineBlueprint {
+  id: string;
+  title: string;
+  source_type: PipelineSourceType;
+  transformation_sequence: string[];
+  outputs: PipelineTargetType[];
+  theme_default: string;
+  schema_version: string;
+  origin: "built-in" | "local";
+}
+
+export interface AutomationPack {
+  id: string;
+  name: string;
+  schema_version: string;
+  recipes: AutomationRecipe[];
+  validation_policy: {
+    require_source_match: boolean;
+    allow_destructive: boolean;
+  };
+}
+
+export interface DesktopMetadata {
+  app_name: string;
+  app_version: string;
+  runtime_mode: RuntimeMode;
+  icon_placeholder_path: string;
+}
